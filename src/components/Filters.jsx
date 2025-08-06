@@ -2,6 +2,24 @@ import { Link } from "react-router";
 
 const Filters = ({ updateFilter, resetFilters }) => {
 
+    const handleFilterClick = (key, value) => {
+        updateFilter(key, value);
+        closeNavbar();
+    };
+
+    const handleReset = () => {
+        resetFilters();
+        closeNavbar();
+    };
+
+    const closeNavbar = () => {
+        const navbar = document.getElementById("navbarSupportedContent");
+        if (navbar && navbar.classList.contains("show")) {
+            const collapseInstance = window.bootstrap.Collapse.getInstance(navbar) || new window.bootstrap.Collapse(navbar, { toggle: false });
+            collapseInstance.toggle();
+        }
+    };
+
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -20,7 +38,7 @@ const Filters = ({ updateFilter, resetFilters }) => {
                                 { label: "Watched", key: "w", value: "true", icon: "fa-check-double", color: "text-success" }
                             ].map(({ label, key, value, icon, color }) => (
                                 <li className="nav-item" key={label}>
-                                    <Link className="nav-link" onClick={() => updateFilter(key, value)}>
+                                    <Link className="nav-link" onClick={() => handleFilterClick(key, value)}>
                                         <i className={`fa-solid ${icon} ${color} me-1`}></i> {label}
                                     </Link>
                                 </li>
@@ -49,7 +67,7 @@ const Filters = ({ updateFilter, resetFilters }) => {
                                         { label: "18+", value: "18+", emoji: "🔞" }
                                     ].map(({ label, value, emoji }) => (
                                         <li key={label}>
-                                            <Link className="dropdown-item" onClick={() => updateFilter("g", value)}>
+                                            <Link className="dropdown-item" onClick={() => handleFilterClick("g", value)}>
                                                 {emoji} {label}
                                             </Link>
                                         </li>
@@ -58,7 +76,7 @@ const Filters = ({ updateFilter, resetFilters }) => {
                             </li>
                         </ul>
                     </div>
-                    <Link className="nav-link" onClick={resetFilters}>
+                    <Link className="nav-link" onClick={handleReset}>
                         <i className="fa-solid fa-rotate-left me-1"></i> Clear filters
                     </Link>
                 </div>

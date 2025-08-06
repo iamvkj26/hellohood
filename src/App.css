@@ -115,7 +115,7 @@ body {
 }
 
 .card-details-img {
-    max-height: 350px;
+    max-height: 400px;
     object-fit: cover;
 }
 
@@ -161,4 +161,8 @@ p {
     .card-grid .movie-card-wrapper {
         flex: 0 0 calc(50% - 1rem);
     }
+}
+
+.collapsing {
+    transition: height 0.5s ease;
 }

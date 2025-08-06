@@ -6,9 +6,11 @@ const useMovieSeries = (filters) => {
 
     const [movieSeries, setMovieSeries] = useState([]);
     const [nextToWatch, setNextToWatch] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const handleGetMovieSeries = async () => {
         try {
+            setLoading(true);
             const response = await getMovieSeries(filters);
             setMovieSeries(response.data);
             const unwatched = Object.values(response.data).flat().filter(m => !m.msWatched);
@@ -16,6 +18,8 @@ const useMovieSeries = (filters) => {
             setNextToWatch(random);
         } catch (error) {
             toast.error(error.message || "Failed to fetch movie/series.");
+        } finally {
+            setLoading(false);
         };
     };
 
@@ -24,7 +28,7 @@ const useMovieSeries = (filters) => {
         handleGetMovieSeries();
     }, [filters]);
 
-    return { movieSeries, nextToWatch, handleGetMovieSeries };
+    return { movieSeries, nextToWatch, loading, handleGetMovieSeries };
 };
 
 export default useMovieSeries;

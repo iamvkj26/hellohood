@@ -4,7 +4,7 @@ import MovieCardList from "./MovieCardList";
 
 const Card = ({ filters }) => {
 
-    const { movieSeries, nextToWatch } = useMovieSeries(filters);
+    const { movieSeries, nextToWatch, loading } = useMovieSeries(filters);
 
     return (
         <>
@@ -12,9 +12,11 @@ const Card = ({ filters }) => {
                 nextToWatch={nextToWatch}
             />
             <div className="container mb-5">
-                <MovieCardList
-                    movieSeries={movieSeries}
-                />
+                {
+                    loading ? <div className="d-flex justify-content-center mt-5">Loading...</div> : <MovieCardList
+                        movieSeries={movieSeries}
+                    />
+                }
             </div>
         </>
     );

@@ -23,4 +23,3 @@ export const getMovieSeries = async (filters = {}) => {
         throw new Error(extractErrorMessage(error));
     };
 };
-

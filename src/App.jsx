@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import { Toaster } from "react-hot-toast";
+import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
 import MovieSeries from "./pages/MovieSeries";
 import MovieSeriesDetails from "./pages/MovieSeriesDetails";
@@ -10,6 +11,7 @@ const App = () => {
 
     return (
         <>
+            <ScrollToTop />
             <div className="d-flex flex-column min-vh-100">
                 <Toaster position="top-right" toastOptions={{ duration: 3000, style: { fontSize: "16px" } }} />
                 <Navbar />
