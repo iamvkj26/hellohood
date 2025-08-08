@@ -1,17 +1,17 @@
 import MovieCard from "./MovieCard";
 
-const MovieCardList = ({ movieSeries }) => (
+const MovieCardList = ({ mS }) => (
     <>
-        {Object.keys(movieSeries).length > 0 ? (
-            Object.entries(movieSeries).reverse().map(([year, list]) => (
+        {Object.keys(mS).length > 0 ? (
+            Object.entries(mS).reverse().map(([year, list]) => (
                 <div key={year} className="mt-3">
                     <div className="h4">Year: {year}</div>
                     <hr />
                     <div className="card-grid">
-                        {list.map(movie => (
+                        {list.map(msE => (
                             <MovieCard
-                                movie={movie}
-                                key={movie._id}
+                                msE={msE}
+                                key={msE.hashedId}
                             />
                         ))}
                     </div>

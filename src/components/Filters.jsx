@@ -1,14 +1,27 @@
-import { Link } from "react-router";
+import { useLocation, useNavigate, Link } from "react-router";
 
 const Filters = ({ updateFilter, resetFilters }) => {
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const isHome = location.pathname === "/";
+
     const handleFilterClick = (key, value) => {
-        updateFilter(key, value);
+        if (isHome) {
+            updateFilter(key, value);
+        } else {
+            navigate(`/?${key}=${value}`);
+        }
         closeNavbar();
     };
 
     const handleReset = () => {
-        resetFilters();
+        if (isHome) {
+            resetFilters();
+        } else {
+            navigate(`/`);
+        }
         closeNavbar();
     };
 

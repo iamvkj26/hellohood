@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { getMovieSeries } from "../api/movieseries";
+import { getMS, getDetailsMS } from "../api/movieseries";
 
 const useMovieSeries = (filters) => {
 
-    const [movieSeries, setMovieSeries] = useState([]);
+    const [mS, setMS] = useState([]);
     const [nextToWatch, setNextToWatch] = useState(null);
+    const [msDetails, setMSDetails] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const handleGetMovieSeries = async () => {
+    const handleGetMS = async () => {
         try {
             setLoading(true);
-            const response = await getMovieSeries(filters);
-            setMovieSeries(response.data);
+            const response = await getMS(filters);
+            setMS(response.data);
             const unwatched = Object.values(response.data).flat().filter(m => !m.msWatched);
             const random = unwatched.length ? unwatched[Math.floor(Math.random() * unwatched.length)] : null;
             setNextToWatch(random);
@@ -23,12 +24,24 @@ const useMovieSeries = (filters) => {
         };
     };
 
+    const handleGetDetailsMS = async (id) => {
+        try {
+            setLoading(true);
+            const response = await getDetailsMS(id);
+            setMSDetails(response.data);
+        } catch (error) {
+            toast.error(error.message || "Failed to fetch movie/series details.");
+        } finally {
+            setLoading(false);
+        };
+    };
+
     useEffect(() => {
         if (!filters || Object.keys(filters).length === 0) return;
-        handleGetMovieSeries();
+        handleGetMS();
     }, [filters]);
 
-    return { movieSeries, nextToWatch, loading, handleGetMovieSeries };
+    return { mS, nextToWatch, loading, msDetails, handleGetDetailsMS };
 };
 
 export default useMovieSeries;
