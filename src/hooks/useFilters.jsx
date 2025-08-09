@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 
-const defaultFilters = { w: "false", s: "", f: "", i: "", g: "", };
+const defaultFilters = { w: "", s: "", f: "", i: "", g: "", };
 
 const useFilters = () => {
 
@@ -16,7 +16,7 @@ const useFilters = () => {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         setFilters({
-            w: params.get("w") || "false",
+            w: params.get("w") || "",
             s: params.get("s") || "",
             f: params.get("f") || "",
             i: params.get("i") || "",

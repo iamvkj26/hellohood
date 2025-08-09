@@ -1,27 +1,14 @@
-import { useLocation, useNavigate, Link } from "react-router";
+import { Link } from "react-router";
 
 const Filters = ({ updateFilter, resetFilters }) => {
 
-    const location = useLocation();
-    const navigate = useNavigate();
-
-    const isHome = location.pathname === "/";
-
     const handleFilterClick = (key, value) => {
-        if (isHome) {
-            updateFilter(key, value);
-        } else {
-            navigate(`/?${key}=${value}`);
-        }
+        updateFilter(key, value);
         closeNavbar();
     };
 
     const handleReset = () => {
-        if (isHome) {
-            resetFilters();
-        } else {
-            navigate(`/`);
-        }
+        resetFilters();
         closeNavbar();
     };
 
@@ -30,7 +17,7 @@ const Filters = ({ updateFilter, resetFilters }) => {
         if (navbar && navbar.classList.contains("show")) {
             const collapseInstance = window.bootstrap.Collapse.getInstance(navbar) || new window.bootstrap.Collapse(navbar, { toggle: false });
             collapseInstance.toggle();
-        }
+        };
     };
 
     return (
@@ -44,10 +31,11 @@ const Filters = ({ updateFilter, resetFilters }) => {
                         <ul className="navbar-nav w-100 d-flex justify-content-evenly flex-wrap">
                             {[
                                 { label: "Movie", key: "f", value: "movie", icon: "fa-film", color: "text-danger" },
-                                { label: "Web Series", key: "f", value: "series", icon: "fa-tv", color: "text-primary" },
+                                { label: "Web Series", key: "f", value: "series", icon: "fa-tv", color: "text-secondary" },
                                 { label: "Bollywood", key: "i", value: "bollywood", icon: "fa-star", color: "text-warning" },
                                 { label: "Hollywood", key: "i", value: "hollywood", icon: "fa-clapperboard", color: "text-black" },
-                                { label: "Other", key: "i", value: "other", icon: "fa-globe", color: "text-info" },
+                                { label: "Other", key: "i", value: "other", icon: "fa-globe", color: "text-primary" },
+                                { label: "To Watch", key: "w", value: "false", icon: "fa-list", color: "text-info" },
                                 { label: "Watched", key: "w", value: "true", icon: "fa-check-double", color: "text-success" }
                             ].map(({ label, key, value, icon, color }) => (
                                 <li className="nav-item" key={label}>
@@ -71,12 +59,13 @@ const Filters = ({ updateFilter, resetFilters }) => {
                                         { label: "Documentary", value: "documentary", emoji: "📚" },
                                         { label: "Drama", value: "drama", emoji: "🎭" },
                                         { label: "Fantasy", value: "fantasy", emoji: "🧙" },
+                                        { label: "History", value: "history", emoji: "📜" },
                                         { label: "Horror", value: "horror", emoji: "👻" },
                                         { label: "Mystery", value: "mystery", emoji: "🕵️" },
-                                        { label: "Other", value: "other", emoji: "🔖" },
                                         { label: "Romance", value: "romance", emoji: "💖" },
                                         { label: "Si-Fi", value: "si-fi", emoji: "🤖" },
                                         { label: "Thriller", value: "thriller", emoji: "👁️" },
+                                        { label: "War", value: "war", emoji: "⚔️" },
                                         { label: "18+", value: "18+", emoji: "🔞" }
                                     ].map(({ label, value, emoji }) => (
                                         <li key={label}>
@@ -90,7 +79,7 @@ const Filters = ({ updateFilter, resetFilters }) => {
                         </ul>
                     </div>
                     <Link className="nav-link" onClick={handleReset}>
-                        <i className="fa-solid fa-rotate-left me-1"></i> Clear filters
+                        <i className="fa-solid fa-rotate-left text-danger me-1"></i> Clear filters
                     </Link>
                 </div>
             </nav>
