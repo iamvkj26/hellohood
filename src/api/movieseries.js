@@ -33,3 +33,22 @@ export const getDetailsMS = async (id) => {
         throw new Error(extractErrorMessage(error));
     };
 };
+
+export const getAboutUs = async () => {
+    try {
+        const response = await api.get("/about");
+        return response.data;
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(extractErrorMessage(error));
+    };
+};
+
+export const postContactus = async (addData) => {
+    try {
+        return await api.post("/contact", addData);
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(extractErrorMessage(error));
+    };
+};

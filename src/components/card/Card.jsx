@@ -1,4 +1,5 @@
 import useMovieSeries from "../../hooks/useMovieSeries";
+import SkeletonNextWatch from "../skeleton/SkeletonNextWatch";
 import NextWatch from "../NextWatch";
 import MovieCardList from "./MovieCardList";
 
@@ -8,15 +9,17 @@ const Card = ({ filters }) => {
 
     return (
         <>
-            <NextWatch
-                nextToWatch={nextToWatch}
-            />
-            <div className="container mb-5">
-                {
-                    loading ? <div className="d-flex justify-content-center mt-5">Loading...</div> : <MovieCardList
-                        mS={mS}
+            {
+                loading ? <SkeletonNextWatch /> :
+                    <NextWatch
+                        nextToWatch={nextToWatch}
                     />
-                }
+            }
+            <div className="container mt-3 mb-3">
+                <MovieCardList
+                    mS={mS}
+                    loading={loading}
+                />
             </div>
         </>
     );

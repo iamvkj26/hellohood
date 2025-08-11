@@ -12,22 +12,22 @@ const MovieSeriesDetails = () => {
     const { id } = useParams();
 
     const { msDetails, handleGetDetailsMS } = useMovieSeries();
-    const { filters, goToHomeWithFilter } = useFilters();
+    const { filters, updateFilter } = useFilters();
 
     useEffect(() => {
         handleGetDetailsMS(id);
     }, [id]);
 
-    if (!msDetails) return <div className="text-center mt-5">Movie not found or invalid access.</div>;
+    if (!msDetails) return <div className="text-center mt-3">Movie not found or invalid access.</div>;
 
     return (
         <>
-            <SearchBar updateFilter={goToHomeWithFilter} searchValue={filters.s} />
+            <SearchBar updateFilter={updateFilter} searchValue={filters.s} />
             <Information />
 
-            <div className="container mt-3">
+            <div className="container mt-3 mb-3">
                 <div className="row">
-                    <div className="col-md-5 text-center mb-3">
+                    <div className="col-md-5 text-center">
                         <img src={msDetails.msPoster} className="img-fluid card-details-img" alt={msDetails.msName} />
                     </div>
                     <div className="col-md-7 text-center">

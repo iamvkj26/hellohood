@@ -26,26 +26,36 @@ const useFilters = () => {
     }, [location.search]);
 
     useEffect(() => {
-        if (!filters || !isHome) return;
+        if (!ready || !isHome) return;
 
         const params = new URLSearchParams();
         Object.entries(filters).forEach(([key, value]) => {
-            if (value && key) params.set(key, value);
+            if (value) params.set(key, value);
         });
 
         navigate({ search: params.toString() }, { replace: true });
-    }, [filters, isHome, navigate]);
+    }, [ready, isHome, filters, navigate]);
 
-    const updateFilter = (key, value) => setFilters((prev) => ({ ...prev, [key]: value }));
-
-    const resetFilters = () => setFilters({ ...defaultFilters });
-
-    const goToHomeWithFilter = (key, value) => {
-        const params = new URLSearchParams({ ...setFilters, [key]: value });
-        navigate(`/?${params.toString()}`);
+    const updateFilter = (key, value) => {
+        const updatedFilters = { ...filters, [key]: value };
+        setFilters(updatedFilters);
+        if (!isHome) {
+            const params = new URLSearchParams();
+            Object.entries(updatedFilters).forEach(([k, v]) => {
+                if (v) params.set(k, v);
+            });
+            navigate(`/?${params.toString()}`);
+        };
     };
 
-    return { filters, ready, updateFilter, resetFilters, goToHomeWithFilter };
+    const resetFilters = () => {
+        setFilters(defaultFilters);
+        if (!isHome) {
+            navigate(`/`);
+        }
+    };
+
+    return { filters, ready, updateFilter, resetFilters };
 };
 
 export default useFilters;

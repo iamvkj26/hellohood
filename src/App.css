@@ -10,13 +10,24 @@
     font-style: normal;
 }
 
-html {
-    scroll-behavior: auto !important;
-}
-
 html,
 body {
     background-color: black !important;
+}
+
+.scroll-to-top {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.scroll-to-top:hover {
+    background-color: #212529 !important;
+    color: #fff !important;
 }
 
 .hello-hood {
@@ -24,7 +35,6 @@ body {
     font-size: 28px;
     font-weight: 500;
     font-style: normal;
-    color: white;
 }
 
 .hello-hood:hover {
@@ -43,10 +53,9 @@ body {
 
 .text-items {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     font-style: normal;
-    color: white;
 }
 
 .search-background {
@@ -165,4 +174,59 @@ p {
 
 .collapsing {
     transition: height 0.5s ease;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200px 0;
+    }
+
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.skeleton-img,
+.skeleton-text,
+.skeleton-badge {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+}
+
+.skeleton-img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: inherit;
+    display: block;
+}
+
+.skeleton-text {
+    width: 70%;
+    height: 0.8rem;
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+.skeleton-badge {
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.skeleton-nextwatch-img {
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+}
+
+.skeleton-text {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    height: 0.8rem;
+    border-radius: 4px;
 }
