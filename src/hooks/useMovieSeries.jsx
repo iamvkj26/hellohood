@@ -19,21 +19,22 @@ const useMovieSeries = (filters) => {
         try {
             append ? setLoading(true) : setLoadingInitial(true);
             const currentSkip = skipOverride ?? skip;
-            const { data } = await getMS(filters, currentSkip, limit);
+            const response = await getMS(filters, currentSkip, limit);
 
-            if (data && Object.keys(data).length > 0) {
+            if (response.data && Object.keys(response.data).length > 0) {
                 setMS(prev => {
-                    if (!append) return data;
+                    if (!append) return response.data;
                     const merged = { ...prev };
-                    Object.entries(data).forEach(([year, items]) => {
+                    Object.entries(response.data).forEach(([year, items]) => {
                         merged[year] = merged[year] ? [...merged[year], ...items] : [...items];
                     });
                     return merged;
                 });
                 setSkip(currentSkip + limit);
-            } else setHasMore(false);
-
-            const unwatched = Object.values(data).flat().filter(m => !m.msWatched);
+            } else {
+                setHasMore(false);
+            };
+            const unwatched = Object.values(response.data).flat().filter(m => !m.msWatched);
             const random = unwatched.length ? unwatched[Math.floor(Math.random() * unwatched.length)] : null;
             setNextToWatch(random);
         } catch (error) {
