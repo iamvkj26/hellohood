@@ -1,10 +1,12 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import { formatDate } from "../utils/formatDate";
 
 const NextWatch = ({ nextToWatch }) => {
 
+    const navigate = useNavigate();
+
     if (!nextToWatch) return null;
-    const { msPoster, msName, msAbout, msRating, msGenre, msReleaseDate, msLink, msSeason } = nextToWatch;
+    const { hashedId, msPoster, msName, msAbout, msRating, msGenre, msReleaseDate, msSeason } = nextToWatch;
 
     return (
         <>
@@ -13,10 +15,8 @@ const NextWatch = ({ nextToWatch }) => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="bg-141414 py-3 px-3 rounded">
-                                <div className="d-flex align-items-center gap-3">
-                                    <Link className="text-decoration-none" to={msLink} target="_blank" rel="noopener noreferrer">
-                                        <img className="next-watch-image text-danger" src={msPoster} alt={msName} />
-                                    </Link>
+                                <div className="d-flex align-items-center gap-3 cp" onClick={() => navigate(`/details/${hashedId}`)}>
+                                    <img className="next-watch-image text-danger" src={msPoster} alt={msName} />
                                     <div>
                                         <h6 className="text-secondary">🎥 Watch Next...</h6>
                                         <h5><strong>{msName}{msSeason === "0" ? "" : ` - (Season ${msSeason})`}</strong></h5>

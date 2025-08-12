@@ -4,30 +4,42 @@ import { getMS, getDetailsMS, getAboutUs } from "../api/movieseries";
 
 const useMovieSeries = (filters) => {
 
-    const [mS, setMS] = useState([]);
+    const [mS, setMS] = useState({});
     const [nextToWatch, setNextToWatch] = useState(null);
     const [msDetails, setMSDetails] = useState(null);
     const [aboutUs, setAboutUs] = useState({});
+    const [loadingInitial, setLoadingInitial] = useState(true);
     const [loading, setLoading] = useState(true);
+    const [skip, setSkip] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
-    const handleGetMS = async () => {
+    const limit = 20;
+
+    const handleGetMS = async (append = false, skipOverride = null) => {
         try {
-            setLoading(true);
-            const fakeData = {
-                2025: new Array(4).fill({}),
-                2010: new Array(3).fill({}),
-                2000: new Array(2).fill({}),
-                1985: new Array(1).fill({})
-            };
-            setMS(fakeData);
-            const response = await getMS(filters);
-            setMS(response.data);
-            const unwatched = Object.values(response.data).flat().filter(m => !m.msWatched);
+            append ? setLoading(true) : setLoadingInitial(true);
+            const currentSkip = skipOverride ?? skip;
+            const { data } = await getMS(filters, currentSkip, limit);
+
+            if (data && Object.keys(data).length > 0) {
+                setMS(prev => {
+                    if (!append) return data;
+                    const merged = { ...prev };
+                    Object.entries(data).forEach(([year, items]) => {
+                        merged[year] = merged[year] ? [...merged[year], ...items] : [...items];
+                    });
+                    return merged;
+                });
+                setSkip(currentSkip + limit);
+            } else setHasMore(false);
+
+            const unwatched = Object.values(data).flat().filter(m => !m.msWatched);
             const random = unwatched.length ? unwatched[Math.floor(Math.random() * unwatched.length)] : null;
             setNextToWatch(random);
         } catch (error) {
             toast.error(error.message || "Failed to fetch movie/series.");
         } finally {
+            setTimeout(() => setLoadingInitial(false), 100);
             setLoading(false);
         };
     };
@@ -35,8 +47,8 @@ const useMovieSeries = (filters) => {
     const handleGetDetailsMS = async (id) => {
         try {
             setLoading(true);
-            const response = await getDetailsMS(id);
-            setMSDetails(response.data);
+            const { data } = await getDetailsMS(id);
+            setMSDetails(data);
         } catch (error) {
             toast.error(error.message || "Failed to fetch movie/series details.");
         } finally {
@@ -47,8 +59,8 @@ const useMovieSeries = (filters) => {
     const handleAboutUs = async () => {
         try {
             setLoading(true);
-            const response = await getAboutUs();
-            setAboutUs(response.data);
+            const { data } = await getAboutUs();
+            setAboutUs(data);
         } catch (error) {
             toast.error(error.message || "Failed to show the details of about us.");
         } finally {
@@ -58,10 +70,14 @@ const useMovieSeries = (filters) => {
 
     useEffect(() => {
         if (!filters || Object.keys(filters).length === 0) return;
-        handleGetMS();
+        setSkip(0);
+        setHasMore(true);
+        setMS({});
+        handleGetMS(false, 0);
+        // eslint-disable-next-line
     }, [filters]);
 
-    return { mS, nextToWatch, loading, msDetails, handleGetDetailsMS, aboutUs, handleAboutUs };
+    return { mS, nextToWatch, loadingInitial, loading, msDetails, handleGetDetailsMS, aboutUs, handleAboutUs, hasMore, handleGetMS };
 };
 
 export default useMovieSeries;

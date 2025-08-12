@@ -14,45 +14,33 @@ const useFilters = () => {
     const isHome = location.pathname === "/";
 
     useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        setFilters({
-            w: params.get("w") || "",
-            s: params.get("s") || "",
-            f: params.get("f") || "",
-            i: params.get("i") || "",
-            g: params.get("g") || ""
-        });
+        const params = Object.fromEntries(new URLSearchParams(location.search));
+        setFilters({ ...defaultFilters, ...params });
         setReady(true);
     }, [location.search]);
 
     useEffect(() => {
         if (!ready || !isHome) return;
-
-        const params = new URLSearchParams();
-        Object.entries(filters).forEach(([key, value]) => {
-            if (value) params.set(key, value);
-        });
-
+        const params = new URLSearchParams(
+            Object.entries(filters).filter(([, v]) => v)
+        );
         navigate({ search: params.toString() }, { replace: true });
-    }, [ready, isHome, filters, navigate]);
+    }, [filters, ready, isHome, navigate]);
 
     const updateFilter = (key, value) => {
-        const updatedFilters = { ...filters, [key]: value };
-        setFilters(updatedFilters);
+        const newFilters = { ...filters, [key]: value };
+        setFilters(newFilters);
         if (!isHome) {
-            const params = new URLSearchParams();
-            Object.entries(updatedFilters).forEach(([k, v]) => {
-                if (v) params.set(k, v);
-            });
-            navigate(`/?${params.toString()}`);
+            const params = new URLSearchParams(
+                Object.entries(newFilters).filter(([, v]) => v)
+            );
+            navigate(`/?${params}`);
         };
     };
 
     const resetFilters = () => {
         setFilters(defaultFilters);
-        if (!isHome) {
-            navigate(`/`);
-        }
+        if (!isHome) navigate("/");
     };
 
     return { filters, ready, updateFilter, resetFilters };

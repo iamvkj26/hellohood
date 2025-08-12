@@ -1,27 +1,17 @@
 import { toast } from "react-hot-toast";
 
-const retryRequest = async (fn, retries = 3, delay = 1000) => {
-
-    let toastId = null;
-
+const retryRequest = async (fn, retries = 3, delay = 500) => {
     for (let i = 0; i < retries; i++) {
         try {
-            if (toastId) toast.dismiss(toastId);
             return await fn();
         } catch (error) {
-            if (!error.response) {
-                if (i < retries - 1) {
-                    toastId = toast.loading(`Retrying... (${i + 1}/${retries})`, {
-                        id: "retry-toast",
-                        duration: delay,
-                    });
-                    await new Promise(res => setTimeout(res, delay));
-                } else {
-                    toast.dismiss("retry-toast");
-                    throw new Error("Network error after multiple retries. Please try again later.");
-                }
+            if (error.response) throw error;
+            if (i < retries - 1) {
+                toast.loading(`Retrying... (${i + 1}/${retries})`, { id: "retry" });
+                await new Promise(res => setTimeout(res, delay * (i + 1)));
             } else {
-                throw error;
+                toast.dismiss("retry");
+                throw new Error("Network error. Please try again later.");
             };
         };
     };

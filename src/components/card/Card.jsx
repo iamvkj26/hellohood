@@ -5,21 +5,13 @@ import MovieCardList from "./MovieCardList";
 
 const Card = ({ filters }) => {
 
-    const { mS, nextToWatch, loading } = useMovieSeries(filters);
+    const { mS, nextToWatch, loadingInitial, loading, hasMore, handleGetMS } = useMovieSeries(filters);
 
     return (
         <>
-            {
-                loading ? <SkeletonNextWatch /> :
-                    <NextWatch
-                        nextToWatch={nextToWatch}
-                    />
-            }
+            {loading ? (<SkeletonNextWatch />) : (<NextWatch nextToWatch={nextToWatch} />)}
             <div className="container mt-3 mb-3">
-                <MovieCardList
-                    mS={mS}
-                    loading={loading}
-                />
+                <MovieCardList mS={mS} loadingInitial={loadingInitial} loading={loading} loadMore={handleGetMS} hasMore={hasMore} />
             </div>
         </>
     );
