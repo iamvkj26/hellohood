@@ -11,7 +11,7 @@ const FiltersMessage = ({ filters }) => {
                             <h6 className="text-light m-0 d-flex align-items-center gap-2">
                                 <span className="badge bg-warning text-black"><i className="fa-solid fa-folder"></i></span>
                                 <strong>
-                                    {`Showing ${w === "true" ? "Watched" : "Unwatched"} Movie/Series${g ? ` in the '${g}' genre` : ""}${i ? ` from the '${i}' industry` : ""}${f ? ` in '${f}' format` : ""}${s ? ` matching '${s}'` : ""}, grouped by year (latest first).`}
+                                    {`Showing ${w === "true" ? "Watched" : w === "false" ? "Unwatched" : ""} Movie/Series${g ? ` in the '${g}' genre` : ""}${i ? ` from the '${i}' industry` : ""}${f ? ` in '${f}' format` : ""}${s ? ` matching '${s}'` : ""}, grouped by year (latest first).`}
                                 </strong>
                             </h6>
                         </div>

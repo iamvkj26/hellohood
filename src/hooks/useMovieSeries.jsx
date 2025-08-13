@@ -23,20 +23,21 @@ const useMovieSeries = (filters) => {
 
             if (response.data && Object.keys(response.data).length > 0) {
                 setMS(prev => {
-                    if (!append) return response.data;
-                    const merged = { ...prev };
-                    Object.entries(response.data).forEach(([year, items]) => {
-                        merged[year] = merged[year] ? [...merged[year], ...items] : [...items];
-                    });
-                    return merged;
+                    let updated;
+                    if (!append) updated = response.data;
+                    else {
+                        updated = { ...prev };
+                        Object.entries(response.data).forEach(([year, items]) => updated[year] = updated[year] ? [...updated[year], ...items] : [...items]);
+                    };
+                    const unwatched = Object.values(updated).flat().filter(m => !m.msWatched);
+                    const random = unwatched.length ? unwatched[Math.floor(Math.random() * unwatched.length)] : null;
+                    setNextToWatch(random);
+                    return updated;
                 });
                 setSkip(currentSkip + limit);
             } else {
                 setHasMore(false);
-            };
-            const unwatched = Object.values(response.data).flat().filter(m => !m.msWatched);
-            const random = unwatched.length ? unwatched[Math.floor(Math.random() * unwatched.length)] : null;
-            setNextToWatch(random);
+            }
         } catch (error) {
             toast.error(error.message || "Failed to fetch movie/series.");
         } finally {

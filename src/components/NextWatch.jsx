@@ -6,7 +6,7 @@ const NextWatch = ({ nextToWatch }) => {
     const navigate = useNavigate();
 
     if (!nextToWatch) return null;
-    const { hashedId, msPoster, msName, msAbout, msRating, msGenre, msReleaseDate, msSeason } = nextToWatch;
+    const { hashedId, msPoster, msName, msSeason, msAbout, msRating, msGenre, msReleaseDate } = nextToWatch;
 
     return (
         <>
