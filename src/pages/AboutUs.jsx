@@ -11,6 +11,7 @@ const AboutUs = () => {
 
     useEffect(() => {
         handleAboutUs();
+        // eslint-disable-next-line
     }, []);
 
     return (

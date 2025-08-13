@@ -16,6 +16,7 @@ const useMovieSeries = (filters) => {
     const limit = 20;
 
     const handleGetMS = async (append = false, skipOverride = null) => {
+        if (!hasMore) return;
         try {
             append ? setLoading(true) : setLoadingInitial(true);
             const currentSkip = skipOverride ?? skip;

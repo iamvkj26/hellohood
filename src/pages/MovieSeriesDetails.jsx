@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, Link } from "react-router";
+import { useParams, Navigate, Link } from "react-router";
 import useMovieSeries from "../hooks/useMovieSeries";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
@@ -14,9 +14,13 @@ const MovieSeriesDetails = () => {
     const { msDetails, handleGetDetailsMS } = useMovieSeries();
     const { filters, updateFilter } = useFilters();
 
+    const isValidId = /^[a-f0-9]{64}$/i.test(id || "");
+
     useEffect(() => {
-        handleGetDetailsMS(id);
-    }, [id]);
+        if (isValidId) handleGetDetailsMS(id);
+    }, [isValidId, id, handleGetDetailsMS]);
+
+    if (!isValidId) return <Navigate to="/" replace />;
 
     if (!msDetails) return <div className="text-center mt-3">Movie not found or invalid access.</div>;
 

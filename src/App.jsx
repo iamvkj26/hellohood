@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import MovieSeries from "./pages/MovieSeries";
@@ -22,6 +22,7 @@ const App = () => {
                         <Route path="/details/:id" element={<MovieSeriesDetails />} />
                         <Route path="/aboutUs" element={<AboutUs />} />
                         <Route path="/contactUs" element={<ContactUs />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </main>
                 <Footer />

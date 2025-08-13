@@ -67,7 +67,7 @@ const Filters = ({ updateFilter, resetFilters }) => {
                                         { label: "Thriller", value: "thriller", emoji: "👁️" },
                                         { label: "War", value: "war", emoji: "⚔️" },
                                         { label: "18+", value: "18+", emoji: "🔞" }
-                                    ].map(({ label, value, emoji }) => (
+                                    ].filter(item => import.meta.env.VITE_NODE_ENV === "development" || item.value !== "18+").map(({ label, value, emoji }) => (
                                         <li key={label}>
                                             <Link className="dropdown-item" onClick={() => handleFilterClick("g", value)}>
                                                 {emoji} {label}
