@@ -26,7 +26,7 @@ export const getMS = async (filters = {}, skip = 0, limit = 20) => {
 
 export const getDetailsMS = async (id) => {
     try {
-        const response = await api.get(`/get/details/${id}`);
+        const response = await retryRequest(() => api.get(`/get/details/${id}`));
         return response.data;
     } catch (error) { throw new Error(extractErrorMessage(error)) };
 };
