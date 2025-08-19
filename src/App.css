@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black !important;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.scroll-to-top {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.scroll-to-top:hover {
+    background-color: #212529 !important;
+    color: #fff !important;
+}
+
+.hello-hood {
+    font-family: "Montserrat", sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.hello-hood:hover {
+    color: white;
+}
+
+.custom-button {
+    background: #ffc107;
+    color: black;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.text-items {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.search-background {
+    height: 150px;
+}
+
+.information {
+    background: linear-gradient(360deg, #0000009c, #483e3e);
+    color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.btn-212529 {
+    background-color: #212529;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.bg-141414 {
+    background: #141414 !important;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 600;
+    color: white;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.008);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+}
+
+.card .card-actions {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .card-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.top-n10 {
+    top: -10px !important;
+}
+
+.next-watch-image {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+
+.card-img {
+    height: 300px;
+    object-fit: fill;
+}
+
+.card-details-img {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.text-ff0000 {
+    color: #ff0000
+}
+
+p {
+    margin-bottom: 5px;
+}
+
+.cp {
+    cursor: pointer;
+}
+
+.nav-link {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
+.nav-link:hover {
+    background-color: black !important;
+    color: white !important;
+}
+
+.blockquote-footer {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card-grid .movie-card-wrapper {
+    flex: 0 0 calc(20% - 1rem);
+}
+
+@media (max-width: 768px) {
+    .card-grid .movie-card-wrapper {
+        flex: 0 0 calc(50% - 1rem);
+    }
+}
+
+.collapsing {
+    transition: height 0.5s ease;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200px 0;
+    }
+
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.skeleton-img,
+.skeleton-text,
+.skeleton-badge {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+}
+
+.skeleton-img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: inherit;
+    display: block;
+}
+
+.skeleton-text {
+    width: 70%;
+    height: 0.8rem;
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+.skeleton-badge {
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.skeleton-nextwatch-img {
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+}
+
+.skeleton-text {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    height: 0.8rem;
+    border-radius: 4px;
+}
