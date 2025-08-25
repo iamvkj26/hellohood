@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-hot-toast";
-import { getMS, getDetailsMS, getAboutUs } from "../api/movieseries";
-import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, MovieSeriesDetails, AboutUsType, Filters } from "../types";
+import { getMS, getDetailsMS, getCollectionMS, getAboutUs } from "../api/movieseries";
+import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, MovieSeriesDetails, Collection, AboutUsType, Filters } from "../types";
 
 const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
 
     const [mS, setMS] = useState<MovieSeriesGrouped>({});
     const [nextToWatch, setNextToWatch] = useState<MovieSeriesItem | null>(null);
     const [msDetails, setMSDetails] = useState<MovieSeriesDetails | null>(null);
+    const [collections, setCollections] = useState<Collection[]>([]);
     const [aboutUs, setAboutUs] = useState<AboutUsType | null>(null);
     const [loadingInitial, setLoadingInitial] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -70,6 +71,20 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
         };
     }, []);
 
+    const handleCollectionsMS = useCallback(async () => {
+        try {
+            const { data } = await getCollectionMS();
+            if (data && typeof data === "object") {
+                setCollections(data.data);
+            } else {
+                toast.error("Failed to fetch collections.");
+            };
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : "Failed to fetch movie/series details.";
+            toast.error(message);
+        }
+    }, []);
+
     const handleAboutUs = async () => {
         try {
             setLoading(true);
@@ -97,7 +112,7 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
     }, [filters]);
 
     return {
-        mS, nextToWatch, loadingInitial, loading, msDetails, aboutUs, hasMore, handleGetMS, handleGetDetailsMS, handleAboutUs
+        mS, nextToWatch, loadingInitial, loading, msDetails, collections, aboutUs, hasMore, handleGetMS, handleGetDetailsMS, handleCollectionsMS, handleAboutUs
     };
 };
 

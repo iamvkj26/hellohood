@@ -186,47 +186,45 @@ p {
     }
 }
 
-.skeleton-img,
-.skeleton-text,
-.skeleton-badge {
+.skeleton {
     background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
     background-size: 200% 100%;
     animation: skeleton-loading 1.5s infinite linear;
 }
 
-.skeleton-img {
+.skeleton-card-badge {
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.skeleton-card-img {
     width: 100%;
     aspect-ratio: 2 / 3;
     border-radius: inherit;
     display: block;
 }
 
-.skeleton-text {
+.skeleton-card-text {
     width: 70%;
     height: 0.8rem;
     border-radius: 4px;
     margin-top: 6px;
 }
 
-.skeleton-badge {
-    width: 50px;
-    height: 20px;
-    border-radius: 10px;
-}
-
 .skeleton-nextwatch-img {
     width: 100px;
     height: 150px;
     border-radius: 8px;
-    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite linear;
 }
 
-.skeleton-text {
-    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-    background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite linear;
+.skeleton-nextwatch-text {
     height: 0.8rem;
+    border-radius: 4px;
+}
+
+.skeleton-message-text {
+    width: 90%;
+    height: 1.2rem;
     border-radius: 4px;
 }

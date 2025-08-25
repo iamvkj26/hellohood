@@ -4,10 +4,12 @@ export interface UseMovieSeriesReturn {
     loadingInitial: boolean;
     loading: boolean;
     msDetails: MovieSeriesDetails | null;
+    collections: Collection[];
     aboutUs: AboutUsType | null;
     hasMore: boolean;
     handleGetMS: (append?: boolean, skipOverride?: number) => Promise<void>;
     handleGetDetailsMS: (id: string) => Promise<void>;
+    handleCollectionsMS: () => Promise<void>;
     handleAboutUs: () => Promise<void>;
 };
 
@@ -70,12 +72,22 @@ export interface MovieSeriesDetailsResponse {
     message: string;
 };
 
+export interface Collection {
+    name: string;
+    icon: string;
+};
+
+export interface CollectionsResponse {
+    data: Collection[];
+};
+
 export interface Filters {
     w?: string;
     s?: string;
     f?: string;
     i?: string;
     g?: string;
+    c?: string;
 };
 
 export interface NextWatchs {
