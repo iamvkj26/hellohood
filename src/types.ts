@@ -35,7 +35,7 @@ export interface MovieSeriesGrouped {
 };
 
 export interface MovieSeriesGroupedResponse {
-    data: MovieSeriesGrouped,
+    data: Section[],
     message: string;
 };
 
