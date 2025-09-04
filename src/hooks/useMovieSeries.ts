@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-hot-toast";
 import { getMS, getDetailsMS, getCollectionMS, getAboutUs } from "../api/movieseries";
-import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, MovieSeriesDetails, Collection, AboutUsType, Filters } from "../types";
+import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, Section, MovieSeriesDetails, Collection, AboutUsType, Filters } from "../types";
 
 const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
 
@@ -29,11 +29,17 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
             if (data && Object.keys(data).length > 0) {
                 setMS(prev => {
                     let updated: MovieSeriesGrouped;
-                    if (!append) updated = data.data;
-                    else {
+                    if (!append) {
+                        updated = {};
+                        (data.data as Section[]).forEach((section) => {
+                            updated[section.label] = Array.isArray(section.movies) ? section.movies : [];
+                        });
+                    } else {
                         updated = { ...prev };
-                        Object.entries(data.data).forEach(([year, items]) => {
-                            updated[year] = updated[year] ? [...updated[year], ...(items as MovieSeriesItem[])] : [...(items as MovieSeriesItem[])];
+                        (data.data as Section[]).forEach((section) => {
+                            const safeMovies = Array.isArray(section.movies) ? section.movies : [];
+                            const existing = Array.isArray(updated[section.label]) ? updated[section.label] : [];
+                            updated[section.label] = [...existing, ...safeMovies];
                         });
                     };
                     const unwatched: MovieSeriesItem[] = Object.values(updated).flat().filter(m => !m.msWatched);

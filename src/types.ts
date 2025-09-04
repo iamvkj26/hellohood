@@ -14,24 +14,24 @@ export interface UseMovieSeriesReturn {
 };
 
 export interface MovieSeriesItem {
-    hashedId: string;
-    msPoster: string;
     msName: string;
-    msSeason: string;
     msAbout?: string;
-    msRating?: number;
+    msPoster: string;
     msGenre?: string[];
+    msSeason: string;
     msReleaseDate?: string;
+    msRating?: number;
     msWatched?: boolean;
-    msLink?: string;
-    msFormat?: string;
-    msIndustry?: string;
-    msUploadedBy?: string;
-    msWatchedAt?: string | null;
+    hashedId: string;
 };
 
+export interface Section {
+    label: string;
+    movies: MovieSeriesItem[];
+}
+
 export interface MovieSeriesGrouped {
-    [year: string]: MovieSeriesItem[];
+    [label: string]: MovieSeriesItem[];
 };
 
 export interface MovieSeriesGroupedResponse {
@@ -59,11 +59,19 @@ export interface GenreBadgeProps {
     genres?: string[];
 };
 
-export interface MovieSeriesDetails extends MovieSeriesItem {
-    msLink: string;
-    msFormat: string;
-    msIndustry: string;
-    msUploadedBy: string;
+export interface MovieSeriesDetails {
+    msName: string;
+    msAbout?: string;
+    msPoster: string;
+    msLink?: string;
+    msGenre?: string[];
+    msFormat?: string;
+    msIndustry?: string;
+    msSeason?: string;
+    msReleaseDate?: string;
+    msRating?: number;
+    msUploadedBy?: string;
+    msWatched?: boolean;
     msWatchedAt?: string | null;
 };
 

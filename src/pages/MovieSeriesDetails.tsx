@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, Navigate, Link } from "react-router";
+import { useParams, Navigate } from "react-router";
 import useMovieSeries from "../hooks/useMovieSeries";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
@@ -45,9 +45,9 @@ const MovieSeriesDetails = () => {
                         <GenreBadge genres={msGenre} />
                         <hr className="border-danger border-2 opacity-75" />
                         <div className="text-center mb-3">
-                            <Link to={msLink} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            <a href={msLink} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
                                 🔗 Watch Now
-                            </Link>
+                            </a>
                         </div>
                         <hr className="border-danger border-2 opacity-75" />
                         <div className="text-end blockquote-footer mt-3 mb-3">{msUploadedBy}</div>
