@@ -1,7 +1,7 @@
 import api from "./api";
 import retryRequest from "./retryRequest";
 import type { AxiosResponse } from "axios";
-import type { Filters, MovieSeriesGroupedResponse, MovieSeriesDetailsResponse, CollectionsResponse, AboutUsTypeResponse, ContactFormData } from "../types";
+import type { Filters, GetMovieSeriesResponse, MovieSeriesDetailsResponse, CollectionsResponse, AboutUsTypeResponse, ContactFormData } from "../types";
 
 const extractErrorMessage = (error: unknown): string => {
     if (error instanceof Error) return error.message;
@@ -12,7 +12,7 @@ const extractErrorMessage = (error: unknown): string => {
     return "Something went wrong";
 };
 
-export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20): Promise<AxiosResponse<MovieSeriesGroupedResponse>> => {
+export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20): Promise<AxiosResponse<GetMovieSeriesResponse>> => {
 
     const { w = "", s = "", f = "", i = "", g = "", c = "" } = filters;
     try {
@@ -27,7 +27,7 @@ export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20
         query.append("skip", skip.toString());
         query.append("limit", limit.toString());
 
-        return await retryRequest(() => api.get<MovieSeriesGroupedResponse>(`/get?${query.toString()}`));
+        return await retryRequest(() => api.get<GetMovieSeriesResponse>(`/get?${query.toString()}`));
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };

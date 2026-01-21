@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-hot-toast";
 import { getMS, getDetailsMS, getCollectionMS, getAboutUs } from "../api/movieseries";
-import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, Section, MovieSeriesDetails, Collection, AboutUsType, Filters } from "../types";
+import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, Section, Counts, MovieSeriesDetails, Collection, AboutUsType, Filters } from "../types";
 
 const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
 
     const [mS, setMS] = useState<MovieSeriesGrouped>({});
     const [nextToWatch, setNextToWatch] = useState<MovieSeriesItem | null>(null);
+    const [counts, setCounts] = useState<Counts | null>(null);
     const [msDetails, setMSDetails] = useState<MovieSeriesDetails | null>(null);
     const [collections, setCollections] = useState<Collection[]>([]);
     const [aboutUs, setAboutUs] = useState<AboutUsType | null>(null);
@@ -25,6 +26,7 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
 
             const currentSkip = skipOverride ?? skip;
             const { data } = await getMS(filters, currentSkip, limit);
+            setCounts(data.counts);
 
             if (data && Object.keys(data).length > 0) {
                 setMS(prev => {
@@ -113,12 +115,13 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
         setSkip(0);
         setHasMore(true);
         setMS({});
+        setCounts(null);
         handleGetMS(false, 0);
         // eslint-disable-next-line
     }, [filters]);
 
     return {
-        mS, nextToWatch, loadingInitial, loading, msDetails, collections, aboutUs, hasMore, handleGetMS, handleGetDetailsMS, handleCollectionsMS, handleAboutUs
+        mS, nextToWatch, loadingInitial, loading, msDetails, collections, aboutUs, hasMore, counts, handleGetMS, handleGetDetailsMS, handleCollectionsMS, handleAboutUs
     };
 };
 

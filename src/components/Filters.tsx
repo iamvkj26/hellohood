@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import type { Filters as FiltersType } from "../hooks/useFilters";
+import type { Counts } from "../types";
 import useMovieSeries from "../hooks/useMovieSeries";
 
 export interface FiltersProps {
     updateFilter: <K extends keyof FiltersType>(key: K, value: FiltersType[K]) => void;
     resetFilters: () => void;
+    counts: Counts | null;
 };
 
-const Filters = ({ updateFilter, resetFilters }: FiltersProps) => {
+const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
 
     const { collections, handleCollectionsMS } = useMovieSeries();
 
@@ -43,17 +45,18 @@ const Filters = ({ updateFilter, resetFilters }: FiltersProps) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav w-100 d-flex justify-content-evenly flex-wrap">
                         {[
-                            { label: "Movie", key: "f", value: "movie", icon: "fa-film", color: "text-danger" },
-                            { label: "Web Series", key: "f", value: "series", icon: "fa-tv", color: "text-secondary" },
-                            { label: "Bollywood", key: "i", value: "bollywood", icon: "fa-star", color: "text-warning" },
-                            { label: "Hollywood", key: "i", value: "hollywood", icon: "fa-clapperboard", color: "text-black" },
-                            { label: "Other", key: "i", value: "other", icon: "fa-globe", color: "text-primary" },
-                            { label: "To Watch", key: "w", value: "false", icon: "fa-list", color: "text-info" },
-                            { label: "Watched", key: "w", value: "true", icon: "fa-check-double", color: "text-success" }
-                        ].map(({ label, key, value, icon, color }) => (
+                            { label: "Movie", key: "f", value: "movie", icon: "fa-film", color: "text-danger", count: counts?.format.movie },
+                            { label: "Web Series", key: "f", value: "series", icon: "fa-tv", color: "text-secondary", count: counts?.format.series },
+                            { label: "Bollywood", key: "i", value: "bollywood", icon: "fa-star", color: "text-warning", count: counts?.industry.bollywood },
+                            { label: "Hollywood", key: "i", value: "hollywood", icon: "fa-clapperboard", color: "text-black", count: counts?.industry.hollywood },
+                            { label: "Other", key: "i", value: "other", icon: "fa-globe", color: "text-primary", count: counts?.industry.others },
+                            { label: "To Watch", key: "w", value: "false", icon: "fa-list", color: "text-info", count: counts?.watched.unwatched },
+                            { label: "Watched", key: "w", value: "true", icon: "fa-check-double", color: "text-success", count: counts?.watched.watched }
+                        ].map(({ label, key, value, icon, color, count }) => (
                             <li className="nav-item" key={label}>
-                                <button className="nav-link" onClick={() => handleFilterClick(key as keyof FiltersType, value)}>
-                                    <i className={`fa-solid ${icon} ${color} me-1`}></i> {label}
+                                <button className="nav-link" title={count !== undefined ? `${label}: ${count}` : undefined} onClick={() => handleFilterClick(key as keyof FiltersType, value)}>
+                                    <i className={`fa-solid ${icon} ${color} me-1`}></i>
+                                    {label}
                                 </button>
                             </li>
                         ))}

@@ -5,6 +5,7 @@ export interface UseMovieSeriesReturn {
     loading: boolean;
     msDetails: MovieSeriesDetails | null;
     collections: Collection[];
+    counts: Counts | null;
     aboutUs: AboutUsType | null;
     hasMore: boolean;
     handleGetMS: (append?: boolean, skipOverride?: number) => Promise<void>;
@@ -28,14 +29,16 @@ export interface MovieSeriesItem {
 export interface Section {
     label: string;
     movies: MovieSeriesItem[];
-}
+};
 
 export interface MovieSeriesGrouped {
     [label: string]: MovieSeriesItem[];
 };
 
-export interface MovieSeriesGroupedResponse {
-    data: Section[],
+export interface GetMovieSeriesResponse {
+    data: Section[];
+    hasMore: boolean;
+    counts: Counts;
     message: string;
 };
 
@@ -57,6 +60,23 @@ export interface MovieCardFooterProps {
 
 export interface GenreBadgeProps {
     genres?: string[];
+};
+
+export interface Counts {
+    total: number;
+    industry: {
+        hollywood: number;
+        bollywood: number;
+        others: number;
+    };
+    format: {
+        movie?: number;
+        series?: number;
+    };
+    watched: {
+        watched: number;
+        unwatched: number;
+    };
 };
 
 export interface MovieSeriesDetails {

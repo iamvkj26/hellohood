@@ -10,13 +10,13 @@ import SkeletonFiltersMessage from "../components/skeleton/SkeletonFiltersMessag
 const MovieSeries = () => {
 
     const { filters, ready, updateFilter, resetFilters } = useFilters();
-    const { loading } = useMovieSeries(filters);
+    const { loading, counts } = useMovieSeries(filters);
     if (!ready || !filters) return null;
 
     return (
         <>
             <SearchBar updateFilter={updateFilter} searchValue={filters.s} />
-            <Filters updateFilter={updateFilter} resetFilters={resetFilters} />
+            <Filters updateFilter={updateFilter} resetFilters={resetFilters} counts={counts} />
             <Information />
             {loading ? (<SkeletonFiltersMessage />) : <FiltersMessage filters={filters} />}
             <Card filters={filters} />
