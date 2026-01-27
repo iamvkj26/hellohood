@@ -83,18 +83,13 @@ const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
                                     { label: "Thriller", value: "thriller", emoji: "👁️" },
                                     { label: "War", value: "war", emoji: "⚔️" },
                                     { label: "18+", value: "18+", emoji: "🔞" }
-                                ]
-                                    .filter(
-                                        (item) =>
-                                            import.meta.env.VITE_NODE_ENV === "development" || item.value !== "18+"
-                                    )
-                                    .map(({ label, value, emoji }) => (
-                                        <li key={label}>
-                                            <button className="dropdown-item" onClick={() => handleFilterClick("g", value as FiltersType["g"])}>
-                                                {emoji} {label}
-                                            </button>
-                                        </li>
-                                    ))}
+                                ].map(({ label, value, emoji }) => (
+                                    <li key={label}>
+                                        <button className="dropdown-item" onClick={() => handleFilterClick("g", value as FiltersType["g"])}>
+                                            {emoji} {label}
+                                        </button>
+                                    </li>
+                                ))}
                             </ul>
                         </li>
                         <li className="nav-item dropdown">

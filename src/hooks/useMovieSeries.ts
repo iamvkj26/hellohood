@@ -44,7 +44,7 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
                             updated[section.label] = [...existing, ...safeMovies];
                         });
                     };
-                    const unwatched: MovieSeriesItem[] = Object.values(updated).flat().filter(m => !m.msWatched);
+                    const unwatched: MovieSeriesItem[] = Object.entries(updated).filter(([label]) => label !== "upcoming").flatMap(([, movies]) => movies).filter(m => !m.msWatched);
                     const random: MovieSeriesItem | null = unwatched.length ? unwatched[Math.floor(Math.random() * unwatched.length)] : null;
                     setNextToWatch(random);
                     return updated;
