@@ -90,9 +90,7 @@ export interface MovieSeriesDetails {
     msSeason?: string;
     msReleaseDate?: string;
     msRating?: number;
-    msUploadedBy?: string;
     msWatched?: boolean;
-    msWatchedAt?: string | null;
 };
 
 export interface MovieSeriesDetailsResponse {

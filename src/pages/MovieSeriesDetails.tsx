@@ -24,7 +24,7 @@ const MovieSeriesDetails = () => {
     if (!isValidId) return <Navigate to="/" replace />;
     if (!msDetails) return <div className="text-center mt-3">Movie not found or invalid access.</div>;
 
-    const { msPoster, msName, msSeason, msAbout, msRating, msReleaseDate, msFormat, msIndustry, msGenre, msLink, msUploadedBy } = msDetails as MSDetails;
+    const { msPoster, msName, msSeason, msAbout, msRating, msReleaseDate, msFormat, msIndustry, msGenre, msLink } = msDetails as MSDetails;
 
     return (
         <>
@@ -50,7 +50,6 @@ const MovieSeriesDetails = () => {
                             </a>
                         </div>
                         <hr className="border-danger border-2 opacity-75" />
-                        <div className="text-end blockquote-footer mt-3 mb-3">{msUploadedBy}</div>
                     </div>
                 </div>
             </div>

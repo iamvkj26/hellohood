@@ -6,7 +6,7 @@ const GenreBadge = ({ genres = [] }: GenreBadgeProps) => {
 
     return (
         <div className="card-text text-center text-danger">
-            <strong className="text-light">Genre:</strong>
+            <strong className="blockquote-footer text-light">Genre:</strong>
             <br />
             <i className="fst-italic">{genres.join(", ")}</i>
         </div>
