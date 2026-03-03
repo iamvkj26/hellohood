@@ -44,11 +44,14 @@ const MovieSeriesDetails = () => {
                         <p>F/I: <strong className="text-muted">{msFormat}/{msIndustry}</strong></p>
                         <GenreBadge genres={msGenre} />
                         <hr className="border-danger border-2 opacity-75" />
-                        <div className="text-center mb-3">
-                            <a href={msLink} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                                🔗 Watch Now
-                            </a>
-                        </div>
+                        {
+                            msLink === "/" ? <div className="blockquote-footer">No OTT or Direct links are available.</div> :
+                                <div className="text-center mb-3">
+                                    <a href={msLink} className="btn btn-dark" target="_blank" rel="noopener noreferrer">
+                                        🔗 Watch Now
+                                    </a>
+                                </div>
+                        }
                         <hr className="border-danger border-2 opacity-75" />
                     </div>
                 </div>
