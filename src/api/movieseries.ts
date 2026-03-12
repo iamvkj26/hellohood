@@ -27,7 +27,7 @@ export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20
         query.append("skip", skip.toString());
         query.append("limit", limit.toString());
 
-        return await retryRequest(() => api.get<GetMovieSeriesResponse>(`/get?${query.toString()}`));
+        return await retryRequest(() => api.get<GetMovieSeriesResponse>(`/movieseries/get?${query.toString()}`));
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };
@@ -35,7 +35,7 @@ export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20
 
 export const getDetailsMS = async (id: string): Promise<AxiosResponse<MovieSeriesDetailsResponse>> => {
     try {
-        return await retryRequest(() => api.get<MovieSeriesDetailsResponse>(`/get/details/${id}`));
+        return await retryRequest(() => api.get<MovieSeriesDetailsResponse>(`/movieseries/get/details/${id}`));
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };
@@ -43,7 +43,7 @@ export const getDetailsMS = async (id: string): Promise<AxiosResponse<MovieSerie
 
 export const getCollectionMS = async (): Promise<AxiosResponse<CollectionsResponse>> => {
     try {
-        return await api.get<CollectionsResponse>("/collections");
+        return await api.get<CollectionsResponse>("/movieseries/collections");
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };
@@ -51,7 +51,7 @@ export const getCollectionMS = async (): Promise<AxiosResponse<CollectionsRespon
 
 export const getAboutUs = async (): Promise<AxiosResponse<AboutUsTypeResponse>> => {
     try {
-        return await api.get<AboutUsTypeResponse>("/about");
+        return await api.get<AboutUsTypeResponse>("/about/get");
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };
@@ -59,7 +59,7 @@ export const getAboutUs = async (): Promise<AxiosResponse<AboutUsTypeResponse>> 
 
 export const postContactus = async (addData: ContactFormData) => {
     try {
-        return await api.post("/contact", addData);
+        return await api.post("/contact/post", addData);
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };
