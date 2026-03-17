@@ -10,8 +10,8 @@ const Navbar = () => (
                 <Link className="text-items text-decoration-none text-light" to="/aboutUs">
                     About Us
                 </Link>
-                <Link className="text-items text-decoration-none text-light" to="/contactUs">
-                    Contact Us
+                <Link className="text-items text-decoration-none text-light" to="/query">
+                    Query
                 </Link>
             </div>
         </div>

@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { postContactus } from "../api/movieseries";
+import moment from "moment";
+import { postContact } from "../api/movieseries";
+import useMovieSeries from "../hooks/useMovieSeries";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
 import Information from "../components/Information";
-import type { ContactFormData, ApiResponse } from "../types";
+import type { ContactFormData, ApiResponse, ContactUsType } from "../types";
 
-const initialState: ContactFormData = { name: "", email: "", mobile: "", message: "" };
+const initialState: ContactFormData = { name: "", message: "" };
 
 const ContactUs = () => {
 
     const { filters, updateFilter } = useFilters();
+
+    const { contactUs, handleContactUs } = useMovieSeries() as {
+        contactUs: ContactUsType[];
+        handleContactUs: () => void;
+    };
 
     const [formData, setFormData] = useState<ContactFormData>(initialState);
     const [loading, setLoading] = useState(false);
@@ -19,7 +26,7 @@ const ContactUs = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response: ApiResponse = await postContactus(formData);
+            const response: ApiResponse = await postContact(formData);
             if (response.status === 200) {
                 toast.success(response.data.message);
                 setFormData(initialState);
@@ -37,6 +44,11 @@ const ContactUs = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    useEffect(() => {
+        handleContactUs();
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <>
             <SearchBar updateFilter={updateFilter} searchValue={filters.s} />
@@ -44,32 +56,87 @@ const ContactUs = () => {
 
             <div className="container mt-3 mb-3">
                 <div className="bg-dark p-3 rounded">
-                    <h2 className="text-danger fw-bold">Contact Us</h2>
-                    <p className="lead">Fill this form for any query.</p>
+                    <h3 className="text-center text-danger fw-bold">
+                        ::::: Query :::::
+                    </h3>
                     <hr className="border-secondary" />
                     <form onSubmit={handleOnSubmit}>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text" id="name">Name</span>
-                            <input type="text" className="form-control" placeholder="John Doe" id="name" name="name" value={formData.name} onChange={handleOnChange} autoComplete="off" required />
-                        </div>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text" id="email">Email</span>
-                            <input type="email" className="form-control" placeholder="johndoe@gmail.com" id="email" name="email" value={formData.email} onChange={handleOnChange} autoComplete="off" required />
-                        </div>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text" id="mobile">Mobile Number</span>
-                            <input type="number" className="form-control" placeholder="1234567890" id="mobile" name="mobile" value={formData.mobile} onChange={handleOnChange} autoComplete="off" required />
-                        </div>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text" id="message">Message</span>
-                            <textarea className="form-control" placeholder="message" rows={3} id="message" name="message" value={formData.message} onChange={handleOnChange} autoComplete="off" required></textarea>
-                        </div>
-                        <div className="text-center">
-                            <button type="submit" className="btn btn-secondary">
-                                {loading ? "Contacting..." : "Submit"}
-                            </button>
+                        <div className="d-flex align-items-center">
+                            <div className="avatar-circle me-2">
+                                <i className="fas fa-user text-secondary"></i>
+                            </div>
+                            <div className="input-group custom-group">
+                                <input
+                                    type="text"
+                                    className="form-control custom-input name-input"
+                                    placeholder="Name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleOnChange}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    className="form-control custom-input message-input"
+                                    placeholder="Comment the movies & web series..."
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleOnChange}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <button
+                                    type="submit"
+                                    className="btn btn-secondary"
+                                >
+                                    {loading ? "..." : "Post"}
+                                </button>
+                            </div>
                         </div>
                     </form>
+                    <hr className="border-secondary" />
+                    <div className="mt-4">
+                        {contactUs.map((contact) => (
+                            <div className="mb-4" key={contact._id}>
+                                <div className="d-flex gap-3">
+                                    <div className="avatar-circle">
+                                        <i className="fas fa-user text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <div className="d-flex align-items-center gap-2">
+                                            <span className="fw-bold text-primary">{contact.name}</span>
+                                            <small className="text-muted">
+                                                <i className="far fa-clock me-1"></i>{moment(contact.createdAt).fromNow()}
+                                            </small>
+                                        </div>
+                                        <p className="mb-1 text-danger">{contact.message}</p>
+                                        <small className="text-secondary cp">
+                                            <i className="fas fa-reply me-1"></i> Reply
+                                        </small>
+                                    </div>
+                                </div>
+                                <div className="d-flex gap-3 mt-3 ms-5 border-start ps-3 border-secondary">
+                                    <div className="avatar-circle-sm">
+                                        <i className="fas fa-user-shield text-success"></i>
+                                    </div>
+                                    <div>
+                                        <div className="d-flex align-items-center gap-2">
+                                            <span className="fw-bold text-info">Admin</span>
+                                            <small className="text-muted">
+                                                <i className="far fa-clock me-1"></i>{moment(contact.updatedAt).fromNow()}
+                                            </small>
+                                        </div>
+                                        <p className="mb-1 text-light">
+                                            <i>
+                                                {contact.status === "resolved" ? "Query Resolved" : "Awaiting Response"}
+                                            </i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>

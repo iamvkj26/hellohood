@@ -7,11 +7,13 @@ export interface UseMovieSeriesReturn {
     collections: Collection[];
     counts: Counts | null;
     aboutUs: AboutUsType | null;
+    contactUs: ContactUsType[];
     hasMore: boolean;
     handleGetMS: (append?: boolean, skipOverride?: number) => Promise<void>;
     handleGetDetailsMS: (id: string) => Promise<void>;
     handleCollectionsMS: () => Promise<void>;
     handleAboutUs: () => Promise<void>;
+    handleContactUs: () => Promise<void>;
 };
 
 export interface MovieSeriesItem {
@@ -145,8 +147,6 @@ export interface AboutUsTypeResponse {
 
 export interface ContactFormData {
     name: string;
-    email: string;
-    mobile: string;
     message: string;
 };
 
@@ -155,4 +155,18 @@ export interface ApiResponse {
     data: {
         message: string;
     };
+};
+
+export interface ContactUsType {
+    _id: string;
+    name: string;
+    message: string;
+    createdAt: Date;
+    status: string;
+    updatedAt: Date;
+};
+
+export interface ContactUsTypeResponse {
+    data: ContactUsType[],
+    message: string;
 };

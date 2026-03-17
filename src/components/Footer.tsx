@@ -8,11 +8,11 @@ const Footer = () => (
                     © 2026 <Link className="text-primary fw-semibold" to="/">HelloHood</Link> | All Rights Reserved.
                 </div>
                 <div className="d-flex gap-2">
-                    <Link to="/" className="text-info fw-semibold text-decoration-none">
-                        About
+                    <Link to="/aboutUs" className="text-info fw-semibold text-decoration-none">
+                        About Us
                     </Link>
-                    <Link to="/" className="text-info fw-semibold text-decoration-none">
-                        Contact Us
+                    <Link to="/query" className="text-info fw-semibold text-decoration-none">
+                        Query
                     </Link>
                 </div>
             </div>

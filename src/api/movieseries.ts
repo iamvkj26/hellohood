@@ -1,7 +1,7 @@
 import api from "./api";
 import retryRequest from "./retryRequest";
 import type { AxiosResponse } from "axios";
-import type { Filters, GetMovieSeriesResponse, MovieSeriesDetailsResponse, CollectionsResponse, AboutUsTypeResponse, ContactFormData } from "../types";
+import type { Filters, GetMovieSeriesResponse, MovieSeriesDetailsResponse, CollectionsResponse, AboutUsTypeResponse, ContactFormData, ContactUsTypeResponse } from "../types";
 
 const extractErrorMessage = (error: unknown): string => {
     if (error instanceof Error) return error.message;
@@ -57,9 +57,17 @@ export const getAboutUs = async (): Promise<AxiosResponse<AboutUsTypeResponse>> 
     };
 };
 
-export const postContactus = async (addData: ContactFormData) => {
+export const postContact = async (addData: ContactFormData) => {
     try {
-        return await api.post("/contact/post", addData);
+        return await api.post("/query/post", addData);
+    } catch (error: unknown) {
+        throw new Error(extractErrorMessage(error));
+    };
+};
+
+export const getContact = async (): Promise<AxiosResponse<ContactUsTypeResponse>> => {
+    try {
+        return await api.get<ContactUsTypeResponse>("/query/get");
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };

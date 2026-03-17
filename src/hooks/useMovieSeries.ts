@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-hot-toast";
-import { getMS, getDetailsMS, getCollectionMS, getAboutUs } from "../api/movieseries";
-import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, Section, Counts, MovieSeriesDetails, Collection, AboutUsType, Filters } from "../types";
+import { getMS, getDetailsMS, getCollectionMS, getAboutUs, getContact } from "../api/movieseries";
+import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, Section, Counts, MovieSeriesDetails, Collection, AboutUsType, ContactUsType, Filters } from "../types";
 
 const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
 
@@ -11,6 +11,7 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
     const [msDetails, setMSDetails] = useState<MovieSeriesDetails | null>(null);
     const [collections, setCollections] = useState<Collection[]>([]);
     const [aboutUs, setAboutUs] = useState<AboutUsType | null>(null);
+    const [contactUs, setContactUs] = useState<ContactUsType[]>([]);
     const [loadingInitial, setLoadingInitial] = useState(true);
     const [loading, setLoading] = useState(true);
     const [skip, setSkip] = useState(0);
@@ -90,7 +91,7 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
         } catch (error: unknown) {
             const message = error instanceof Error ? error.message : "Failed to fetch movie/series details.";
             toast.error(message);
-        }
+        };
     }, []);
 
     const handleAboutUs = async () => {
@@ -99,6 +100,23 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
             const { data } = await getAboutUs();
             if (data && typeof data === "object") {
                 setAboutUs(data.data as AboutUsType);
+            } else {
+                toast.error("Invalid About Us data received.");
+            };
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : "Failed to fetch About Us.";
+            toast.error(message);
+        } finally {
+            setLoading(false);
+        };
+    };
+
+    const handleContactUs = async () => {
+        try {
+            setLoading(true);
+            const { data } = await getContact();
+            if (data && typeof data === "object") {
+                setContactUs(data.data);
             } else {
                 toast.error("Invalid About Us data received.");
             };
@@ -121,7 +139,7 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
     }, [filters]);
 
     return {
-        mS, nextToWatch, loadingInitial, loading, msDetails, collections, aboutUs, hasMore, counts, handleGetMS, handleGetDetailsMS, handleCollectionsMS, handleAboutUs
+        mS, nextToWatch, loadingInitial, loading, msDetails, collections, aboutUs, contactUs, hasMore, counts, handleGetMS, handleGetDetailsMS, handleCollectionsMS, handleAboutUs, handleContactUs
     };
 };
 

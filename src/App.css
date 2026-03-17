@@ -228,3 +228,58 @@ p {
     height: 1.2rem;
     border-radius: 4px;
 }
+
+.avatar-circle {
+    width: 50px;
+    height: 50px;
+    background-color: #2c2c2c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-group .form-control {
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    color: white;
+    height: 50px;
+}
+
+.name-input {
+    max-width: 200px;
+    border-right: none;
+}
+
+.message-input {
+    border-left: none;
+    border-right: none;
+}
+
+.custom-group .btn {
+    border-left: none;
+    height: 50px;
+}
+
+.custom-group {
+    border-radius: 8px;
+}
+
+.custom-group:focus-within {
+    box-shadow: 0 0 0 1px #86b7fe;
+    border-radius: 8px;
+}
+
+.avatar-circle-sm {
+    width: 35px;
+    height: 35px;
+    background: #1f1f1f;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    margin: 0;
+}
