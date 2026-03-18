@@ -30,6 +30,7 @@ const ContactUs = () => {
             if (response.status === 200) {
                 toast.success(response.data.message);
                 setFormData(initialState);
+                handleContactUs();
             };
         } catch (error: unknown) {
             if (error instanceof Error) toast.error(error.message);
@@ -56,9 +57,10 @@ const ContactUs = () => {
 
             <div className="container mt-3 mb-3">
                 <div className="bg-dark p-3 rounded">
-                    <h3 className="text-center text-danger fw-bold">
-                        ::::: Query :::::
-                    </h3>
+                    <h3 className="text-center text-light fw-bold">::::: Query :::::</h3>
+                    <h5 className="text-center text-success"><i>Kindly search on our site before making a request.</i></h5>
+                    <h5 className="text-center text-danger"><i>Make Request Down in Comments !!!</i></h5>
+                    <h6 className="text-center text-info">Make a specific request with proper name of movie and web series</h6>
                     <hr className="border-secondary" />
                     <form onSubmit={handleOnSubmit}>
                         <div className="d-flex align-items-center">
@@ -118,7 +120,7 @@ const ContactUs = () => {
                                 </div>
                                 <div className="d-flex gap-3 mt-3 ms-5 border-start ps-3 border-secondary">
                                     <div className="avatar-circle-sm">
-                                        <i className="fas fa-user-shield text-success"></i>
+                                        <i className={`fas fa-user-shield ${contact.status === "resolved" ? "text-success" : "text-warning"}`}></i>
                                     </div>
                                     <div>
                                         <div className="d-flex align-items-center gap-2">

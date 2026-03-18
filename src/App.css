@@ -56,6 +56,27 @@ body {
     font-size: 15px;
     font-weight: 600;
     font-style: normal;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.text-items::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.text-items:hover::after {
+    width: 100%;
+}
+
+.text-items.active::after {
+    width: 100%;
 }
 
 .search-background {
