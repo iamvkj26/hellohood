@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 
 export type Filters = {
     w: string;
@@ -16,6 +16,7 @@ const useFilters = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [filters, setFilters] = useState<Filters>(defaultFilters);
     const [ready, setReady] = useState(false);
@@ -23,19 +24,23 @@ const useFilters = () => {
     const isHome = location.pathname === "/";
 
     useEffect(() => {
-        const params = Object.fromEntries(new URLSearchParams(location.search)) as Partial<Filters>;
-        setFilters({ ...defaultFilters, ...params });
+        const paramsObj: Partial<Filters> = {};
+        searchParams.forEach((value, key) => paramsObj[key as keyof Filters] = value);
+        setFilters({ ...defaultFilters, ...paramsObj });
         setReady(true);
-    }, [location.search]);
+    }, [searchParams]);
 
     useEffect(() => {
         if (!ready || !isHome) return;
-        const params = new URLSearchParams(Object.entries(filters).filter(([, v]) => v));
-        navigate({ search: params.toString() }, { replace: true });
-    }, [filters, ready, isHome, navigate]);
+        const params: Record<string, string> = {};
+        Object.entries(filters).forEach(([k, v]) => {
+            if (v) params[k] = v;
+        });
+        setSearchParams(params);
+    }, [filters, ready, isHome, setSearchParams]);
 
     const updateFilter = (key: keyof Filters, value: string) => {
-        const newFilters: Filters = { ...filters, [key]: value };
+        const newFilters = { ...filters, [key]: value };
         setFilters(newFilters);
         if (!isHome) {
             const params = new URLSearchParams(Object.entries(newFilters).filter(([, v]) => v));
@@ -45,6 +50,7 @@ const useFilters = () => {
 
     const resetFilters = () => {
         setFilters(defaultFilters);
+        setSearchParams({});
         if (!isHome) navigate("/");
     };
 

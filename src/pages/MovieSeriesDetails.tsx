@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams, Navigate } from "react-router";
 import useMovieSeries from "../hooks/useMovieSeries";
+import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
 import Information from "../components/Information";
@@ -20,6 +21,8 @@ const MovieSeriesDetails = () => {
     useEffect(() => {
         if (isValidId && id) handleGetDetailsMS(id);
     }, [isValidId, id, handleGetDetailsMS]);
+
+    usePageTitle(msDetails?.msName ? `${msDetails.msName} | HelloHood` : "Loading... | HelloHood");
 
     if (!isValidId) return <Navigate to="/" replace />;
     if (!msDetails) return <div className="text-center mt-3">Movie not found or invalid access.</div>;

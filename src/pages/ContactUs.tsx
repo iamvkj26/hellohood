@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import moment from "moment";
 import { postContact } from "../api/movieseries";
 import useMovieSeries from "../hooks/useMovieSeries";
+import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
 import Information from "../components/Information";
@@ -44,6 +45,8 @@ const ContactUs = () => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
+
+    usePageTitle("Query | HelloHood");
 
     useEffect(() => {
         handleContactUs();

@@ -79,6 +79,10 @@ body {
     width: 100%;
 }
 
+.hover-white:hover {
+    color: white !important;
+}
+
 .search-background {
     height: 200px;
 }

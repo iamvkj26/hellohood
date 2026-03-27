@@ -15,9 +15,9 @@ const MovieCardList = ({ mS, loadingInitial, loading, loadMore, hasMore }: Movie
         const skeletonData: Section[] = [
             { label: "upcoming", movies: Array.from({ length: 4 }) as MovieSeriesItem[] },
             { label: "2025", movies: Array.from({ length: 4 }) as MovieSeriesItem[] },
-            { label: "2010", movies: Array.from({ length: 3 }) as MovieSeriesItem[] },
-            { label: "1985", movies: Array.from({ length: 1 }) as MovieSeriesItem[] },
-            { label: "2000", movies: Array.from({ length: 2 }) as MovieSeriesItem[] },
+            { label: "2015", movies: Array.from({ length: 3 }) as MovieSeriesItem[] },
+            { label: "2005", movies: Array.from({ length: 2 }) as MovieSeriesItem[] },
+            { label: "1995", movies: Array.from({ length: 1 }) as MovieSeriesItem[] },
         ];
 
         return (

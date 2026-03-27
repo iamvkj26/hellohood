@@ -47,10 +47,10 @@ const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
                         {[
                             { label: "Movie", key: "f", value: "movie", icon: "fa-film", color: "text-danger", count: counts?.format.movie },
                             { label: "Web Series", key: "f", value: "series", icon: "fa-tv", color: "text-secondary", count: counts?.format.series },
-                            { label: "Bollywood", key: "i", value: "bollywood", icon: "fa-star", color: "text-warning", count: counts?.industry.bollywood },
-                            { label: "Hollywood", key: "i", value: "hollywood", icon: "fa-clapperboard", color: "text-black", count: counts?.industry.hollywood },
+                            { label: "Bollywood", key: "i", value: "bollywood", icon: "fa-star", color: "text-info", count: counts?.industry.bollywood },
+                            { label: "Hollywood", key: "i", value: "hollywood", icon: "fa-clapperboard", color: "text-light", count: counts?.industry.hollywood },
                             { label: "Other", key: "i", value: "other", icon: "fa-globe", color: "text-primary", count: counts?.industry.others },
-                            { label: "To Watch", key: "w", value: "false", icon: "fa-list", color: "text-info", count: counts?.watched.unwatched },
+                            { label: "To Watch", key: "w", value: "false", icon: "fa-list", color: "text-warning", count: counts?.watched.unwatched },
                             { label: "Watched", key: "w", value: "true", icon: "fa-check-double", color: "text-success", count: counts?.watched.watched }
                         ].map(({ label, key, value, icon, color, count }) => (
                             <li className="nav-item" key={label}>

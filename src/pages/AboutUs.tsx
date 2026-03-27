@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
 import useMovieSeries from "../hooks/useMovieSeries";
+import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
 import Information from "../components/Information";
@@ -14,6 +15,8 @@ const AboutUs = () => {
     };
 
     const { filters, updateFilter } = useFilters();
+
+    usePageTitle("About | HelloHood");
 
     useEffect(() => {
         handleAboutUs();

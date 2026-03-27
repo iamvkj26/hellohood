@@ -5,13 +5,13 @@ const Footer = () => (
         <div className="container">
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <div>
-                    © 2026 <Link className="text-primary fw-semibold" to="/">HelloHood</Link> | All Rights Reserved.
+                    © 2026 <Link className="text-primary fw-bold" to="/">HelloHood</Link> | All Rights Reserved.
                 </div>
-                <div className="d-flex gap-2">
-                    <Link to="/aboutUs" className="text-info fw-semibold text-decoration-none">
+                <div className="d-flex gap-3">
+                    <Link to="/aboutUs" className="text-primary fw-bold text-decoration-none hover-white">
                         About Us
                     </Link>
-                    <Link to="/query" className="text-info fw-semibold text-decoration-none">
+                    <Link to="/query" className="text-primary fw-bold text-decoration-none hover-white">
                         Query
                     </Link>
                 </div>
