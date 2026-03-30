@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 
 export type Filters = {
-    w: string;
-    s: string;
     f: string;
     i: string;
+    w: string;
+    s: string;
     g: string;
     c: string;
+    o: string;
 };
 
-const defaultFilters: Filters = { w: "", s: "", f: "", i: "", g: "", c: "" };
+const defaultFilters: Filters = { f: "", i: "", w: "", s: "", g: "", c: "", o: "" };
 
 const useFilters = () => {
 

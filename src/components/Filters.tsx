@@ -45,24 +45,24 @@ const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav w-100 d-flex justify-content-evenly flex-wrap">
                         {[
-                            { label: "Movie", key: "f", value: "movie", icon: "fa-film", color: "text-danger", count: counts?.format.movie },
-                            { label: "Web Series", key: "f", value: "series", icon: "fa-tv", color: "text-secondary", count: counts?.format.series },
-                            { label: "Bollywood", key: "i", value: "bollywood", icon: "fa-star", color: "text-info", count: counts?.industry.bollywood },
-                            { label: "Hollywood", key: "i", value: "hollywood", icon: "fa-clapperboard", color: "text-light", count: counts?.industry.hollywood },
-                            { label: "Other", key: "i", value: "other", icon: "fa-globe", color: "text-primary", count: counts?.industry.others },
-                            { label: "To Watch", key: "w", value: "false", icon: "fa-list", color: "text-warning", count: counts?.watched.unwatched },
-                            { label: "Watched", key: "w", value: "true", icon: "fa-check-double", color: "text-success", count: counts?.watched.watched }
-                        ].map(({ label, key, value, icon, color, count }) => (
+                            { label: "Movie", key: "f", value: "movie", icon: "fa-film", count: counts?.format.movie },
+                            { label: "Web Series", key: "f", value: "series", icon: "fa-tv", count: counts?.format.series },
+                            { label: "Bollywood", key: "i", value: "bollywood", icon: "fa-star", count: counts?.industry.bollywood },
+                            { label: "Hollywood", key: "i", value: "hollywood", icon: "fa-clapperboard", count: counts?.industry.hollywood },
+                            { label: "Other", key: "i", value: "other", icon: "fa-globe", count: counts?.industry.others },
+                            { label: "To Watch", key: "w", value: "false", icon: "fa-list", count: counts?.watched.unwatched },
+                            { label: "Watched", key: "w", value: "true", icon: "fa-check-double", count: counts?.watched.watched }
+                        ].map(({ label, key, value, icon, count }) => (
                             <li className="nav-item" key={label}>
                                 <button className="nav-link" title={count !== undefined ? `${label}: ${count}` : undefined} onClick={() => handleFilterClick(key as keyof FiltersType, value)}>
-                                    <i className={`fa-solid ${icon} ${color} me-1`}></i>
+                                    <i className={`fa-solid ${icon} me-1`}></i>
                                     {label}
                                 </button>
                             </li>
                         ))}
                         <li className="nav-item dropdown">
                             <button className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                                <i className="fa-solid fa-burst text-secondary me-1"></i> Genre
+                                <i className="fa-solid fa-burst me-1"></i> Genre
                             </button>
                             <ul className="dropdown-menu">
                                 {[
@@ -94,13 +94,32 @@ const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
                         </li>
                         <li className="nav-item dropdown">
                             <button className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                                <i className="fa-solid fa-folder-open text-danger me-1"></i> Collections
+                                <i className="fa-solid fa-folder-open me-1"></i> Collections
                             </button>
                             <ul className="dropdown-menu">
                                 {collections.map((c, index) => (
                                     <li key={index + 1}>
                                         <button className="dropdown-item" onClick={() => handleFilterClick("c", c.name as FiltersType["c"])}>
                                             <i className={`fa ${c.icon} me-2`}></i> {c.name}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <button className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                <i className="fa-solid fa-laptop me-1"></i> OTT
+                            </button>
+                            <ul className="dropdown-menu">
+                                {[
+                                    { label: "Netflix", value: "netflix", emoji: "🟥" },
+                                    { label: "Prime", value: "prime", emoji: "🔵" },
+                                    { label: "Hotstar", value: "hotstar", emoji: "⭐" },
+                                    { label: "Other", value: "other", emoji: "🌐" }
+                                ].map(({ label, value, emoji }) => (
+                                    <li key={label}>
+                                        <button className="dropdown-item" onClick={() => handleFilterClick("o", value as FiltersType["o"])}>
+                                            {emoji} {label}
                                         </button>
                                     </li>
                                 ))}

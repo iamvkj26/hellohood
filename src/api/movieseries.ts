@@ -14,15 +14,16 @@ const extractErrorMessage = (error: unknown): string => {
 
 export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20): Promise<AxiosResponse<GetMovieSeriesResponse>> => {
 
-    const { w = "", s = "", f = "", i = "", g = "", c = "" } = filters;
+    const { f = "", i = "", w = "", s = "", g = "", c = "", o = "" } = filters;
     try {
         const query = new URLSearchParams();
-        if (w) query.append("watched", w);
-        if (s) query.append("search", s);
         if (f) query.append("format", f);
         if (i) query.append("industry", i);
+        if (w) query.append("watched", w);
+        if (s) query.append("search", s);
         if (g) query.append("genre", g);
         if (c) query.append("collection", c);
+        if (o) query.append("ott", o);
 
         query.append("skip", skip.toString());
         query.append("limit", limit.toString());

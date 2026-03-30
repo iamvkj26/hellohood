@@ -110,12 +110,13 @@ export interface CollectionsResponse {
 };
 
 export interface Filters {
-    w?: string;
-    s?: string;
     f?: string;
     i?: string;
+    w?: string;
+    s?: string;
     g?: string;
     c?: string;
+    o?: string;
 };
 
 export interface NextWatchs {
