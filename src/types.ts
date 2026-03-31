@@ -66,19 +66,12 @@ export interface GenreBadgeProps {
 
 export interface Counts {
     total: number;
-    industry: {
-        hollywood: number;
-        bollywood: number;
-        others: number;
-    };
-    format: {
-        movie?: number;
-        series?: number;
-    };
-    watched: {
-        watched: number;
-        unwatched: number;
-    };
+    format: Record<string, number>;
+    industry: Record<string, number>;
+    watched: Record<string, number>;
+    genre: Record<string, number>;
+    collection: Record<string, number>;
+    ott: Record<string, number>;
 };
 
 export interface MovieSeriesDetails {

@@ -23,14 +23,14 @@ const SearchBar = ({ updateFilter, searchValue = "" }: SearchBarProps) => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary search-background">
+        <nav className="navbar navbar-expand-lg search-background bg-141414">
             <div className="container-fluid">
                 <div className="mx-auto">
-                    <div className="h4 mb-3">Search for movies, web series here...</div>
+                    <div className="h4 mb-3 text-light">Search for movies, web series here...</div>
                     <div className="d-flex">
-                        <input type="search" className="form-control me-2" placeholder="Search the movies, web series..."
+                        <input type="search" className="form-control bg-141414 me-2" placeholder="Search the movies, web series..."
                             value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
-                        <button className="btn btn-dark btn-212529" type="button" onClick={handleSearch}>
+                        <button className="btn btn-dark btn-141414" type="button" onClick={handleSearch}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>

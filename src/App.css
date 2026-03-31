@@ -94,8 +94,16 @@ body {
     padding: 1rem;
 }
 
-.btn-212529 {
-    background-color: #212529;
+.btn-141414 {
+    background-color: #141414;
+}
+
+.btn-141414:hover,
+.btn-141414:focus,
+.btn-141414:active {
+    background-color: transparent !important;
+    color: inherit !important;
+    outline: none !important;
 }
 
 .form-control:focus {
@@ -172,7 +180,7 @@ p {
 }
 
 .nav-link:hover {
-    background-color: black !important;
+    background-color: #3a3b3c !important;
     color: white !important;
 }
 
@@ -307,4 +315,9 @@ p {
 
 p {
     margin: 0;
+}
+
+.dropdown-item:hover {
+    background-color: transparent !important;
+    color: red;
 }
