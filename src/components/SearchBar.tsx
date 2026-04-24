@@ -26,9 +26,9 @@ const SearchBar = ({ updateFilter, searchValue = "" }: SearchBarProps) => {
         <nav className="navbar navbar-expand-lg search-background bg-141414">
             <div className="container-fluid">
                 <div className="mx-auto">
-                    <div className="h4 mb-3 text-light">Search for movies, web series here...</div>
+                    <div className="h4 mb-3 text-light">Search for a movie, web series, person here...</div>
                     <div className="d-flex">
-                        <input type="search" className="form-control bg-141414 me-2" placeholder="Search the movies, web series..."
+                        <input type="search" className="form-control search-italic bg-141414 me-2" placeholder="Search for a movie, web series, person..."
                             value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
                         <button className="btn btn-dark btn-141414" type="button" onClick={handleSearch}>
                             <i className="fa-solid fa-magnifying-glass"></i>

@@ -321,3 +321,7 @@ p {
     background-color: transparent !important;
     color: red;
 }
+
+.search-italic::placeholder {
+    font-style: italic;
+}

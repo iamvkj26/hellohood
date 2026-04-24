@@ -5,6 +5,7 @@ import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
 import Information from "../components/Information";
+import CastBadge from "../components/shared/CastBadge";
 import GenreBadge from "../components/shared/GenreBadge";
 import { formatDate } from "../utils/formatDate";
 import type { MovieSeriesDetails as MSDetails } from "../types";
@@ -27,7 +28,7 @@ const MovieSeriesDetails = () => {
     if (!isValidId) return <Navigate to="/" replace />;
     if (!msDetails) return <div className="text-center mt-3">Movie not found or invalid access.</div>;
 
-    const { msPoster, msName, msSeason, msAbout, msRating, msReleaseDate, msFormat, msIndustry, msGenre, msLink } = msDetails as MSDetails;
+    const { msPoster, msName, msSeason, msAbout, msRating, msReleaseDate, msFormat, msIndustry, msCast, msGenre, msLink } = msDetails as MSDetails;
 
     return (
         <>
@@ -42,9 +43,10 @@ const MovieSeriesDetails = () => {
                     <div className="col-md-7 text-center">
                         <p><strong>{msName}{msSeason === "0" ? "" : ` - (Season ${msSeason})`}</strong></p>
                         <p className="text-muted small">{msAbout}</p>
-                        <p>IMDB Rating: <strong className="text-primary">{msRating}/10</strong></p>
+                        <p>IMDb Rating: <strong className="text-primary">{msRating}/10</strong></p>
                         <p>Release Date: <strong className="text-danger">{formatDate(msReleaseDate)}</strong></p>
                         <p>F/I: <strong className="text-muted">{msFormat}/{msIndustry}</strong></p>
+                        <CastBadge casts={msCast} />
                         <GenreBadge genres={msGenre} />
                         <hr className="border-danger border-2 opacity-75" />
                         {
