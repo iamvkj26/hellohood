@@ -65,11 +65,11 @@ const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
                                 {[
                                     { label: "Bollywood", value: "bollywood", count: counts?.industry.bollywood },
                                     { label: "Hollywood", value: "hollywood", count: counts?.industry.hollywood },
-                                    { label: "Other", value: "other", count: counts?.industry.others }
+                                    { label: "Other", value: "other", count: counts?.industry.other }
                                 ].map(({ label, value, count }) => (
                                     <li key={label}>
                                         <button className="dropdown-item" title={count !== undefined ? `${label}: ${count}` : undefined} onClick={() => handleFilterClick("i", value as FiltersType["i"])}>
-                                            <i className="fa-solid fa-caret-right me-1"></i>  {label}
+                                            <i className="fa-solid fa-caret-right me-1"></i> {label}
                                         </button>
                                     </li>
                                 ))}

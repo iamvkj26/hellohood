@@ -28,7 +28,7 @@ const MovieSeriesDetails = () => {
     if (!isValidId) return <Navigate to="/" replace />;
     if (!msDetails) return <div className="text-center mt-3">Movie not found or invalid access.</div>;
 
-    const { msPoster, msName, msSeason, msAbout, msRating, msReleaseDate, msFormat, msIndustry, msCast, msGenre, msLink } = msDetails as MSDetails;
+    const { msPoster, msName, msAbout, msRating, msReleaseDate, msFormat, msIndustry, msCast, msGenre, msLink } = msDetails as MSDetails;
 
     return (
         <>
@@ -41,11 +41,11 @@ const MovieSeriesDetails = () => {
                         <img src={msPoster} className="img-fluid card-details-img" alt={msName} />
                     </div>
                     <div className="col-md-7 text-center">
-                        <p><strong>{msName}{msSeason === "0" ? "" : ` - (Season ${msSeason})`}</strong></p>
+                        <p><strong>{msName}</strong></p>
                         <p className="text-muted small">{msAbout}</p>
                         <p>IMDb Rating: <strong className="text-primary">{msRating}/10</strong></p>
                         <p>Release Date: <strong className="text-danger">{formatDate(msReleaseDate)}</strong></p>
-                        <p>F/I: <strong className="text-muted">{msFormat}/{msIndustry}</strong></p>
+                        <p>F/I: <strong className="text-muted text-capitalize">{msFormat}/{msIndustry}</strong></p>
                         <CastBadge casts={msCast} />
                         <GenreBadge genres={msGenre} />
                         <hr className="border-danger border-2 opacity-75" />

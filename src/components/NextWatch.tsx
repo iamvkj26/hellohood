@@ -8,7 +8,7 @@ const NextWatch = ({ nextToWatch }: NextWatchs) => {
 
     if (!nextToWatch) return null;
 
-    const { hashedId, msPoster, msName, msSeason, msAbout, msRating, msGenre, msReleaseDate } = nextToWatch;
+    const { hashedId, msPoster, msName, msAbout, msRating, msGenre, msReleaseDate } = nextToWatch;
 
     return (
         <div className="container mt-1">
@@ -19,7 +19,7 @@ const NextWatch = ({ nextToWatch }: NextWatchs) => {
                             <img className="next-watch-image text-danger" src={msPoster} alt={msName} />
                             <div>
                                 <h6 className="text-secondary">🎥 Watch Next...</h6>
-                                <h5><strong>{msName} {msSeason === "0" ? "" : ` - (Season ${msSeason})`}</strong></h5>
+                                <h5><strong>{msName}</strong></h5>
                                 <h6 className="text-muted small">{msAbout?.slice(0, 65)}...</h6>
                                 <p className="text-secondary small">
                                     ⭐ <strong>{msRating}</strong> | 🎭 {msGenre?.join(", ")}

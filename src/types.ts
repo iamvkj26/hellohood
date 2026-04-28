@@ -21,11 +21,12 @@ export interface MovieSeriesItem {
     msAbout?: string;
     msPoster: string;
     msGenre?: string[];
-    msSeason: string;
     msReleaseDate?: string;
     msRating?: number;
     msWatched?: boolean;
     hashedId: string;
+    sStatus: string;
+    sSeasons: string;
 };
 
 export interface Section {
@@ -87,7 +88,6 @@ export interface MovieSeriesDetails {
     msGenre?: string[];
     msFormat?: string;
     msIndustry?: string;
-    msSeason?: string;
     msReleaseDate?: string;
     msRating?: number;
     msWatched?: boolean;
