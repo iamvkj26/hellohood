@@ -26,7 +26,7 @@ export interface MovieSeriesItem {
     msWatched?: boolean;
     hashedId: string;
     sStatus: string;
-    sSeasons: string;
+    sTSeasons: number;
 };
 
 export interface Section {
@@ -91,6 +91,9 @@ export interface MovieSeriesDetails {
     msReleaseDate?: string;
     msRating?: number;
     msWatched?: boolean;
+    msOTT?: string;
+    sStatus?: string;
+    sTSeasons?: number;
 };
 
 export interface MovieSeriesDetailsResponse {

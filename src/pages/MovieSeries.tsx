@@ -25,18 +25,18 @@ const MovieSeries = () => {
 
     const hasSearch = !!filters.s;
 
-    let title = "Movies, Web Series";
+    let title = "";
 
-    if (hasSearch && activeFilters.length === 0) title = `Search: ${filters.s}`;
+    if (hasSearch && activeFilters.length === 0) title = `${filters.s}`;
     else if (!hasSearch && activeFilters.length === 1) title = activeFilters[0];
     else if (hasSearch || activeFilters.length > 1) {
         const parts: string[] = [];
-        if (hasSearch) parts.push(`Search: ${filters.s}`);
+        if (hasSearch) parts.push(`${filters.s}`);
         parts.push(...activeFilters);
         title = parts.join(" | ");
     };
 
-    usePageTitle(`${title} | HelloHood`);
+    usePageTitle(`${capitalize(title)}`);
 
     if (!ready || !filters) return null;
 

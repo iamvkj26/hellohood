@@ -15,6 +15,10 @@ body {
     font-style: normal;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .scroll-to-top {
     width: 40px;
     height: 40px;
@@ -324,4 +328,27 @@ p {
 
 .search-italic::placeholder {
     font-style: italic;
+}
+
+.poster-card {
+    width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1b1b1b;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.card-details-img {
+    display: block;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border: 0;
+    outline: none;
+}
+
+.watch-btn {
+    width: 100%;
+    border-radius: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }

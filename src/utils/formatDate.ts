@@ -9,5 +9,5 @@ import moment from "moment";
 
 export const formatDate = (date: string | Date | undefined | null, withTime = false): string => {
     if (!date) return "N/A";
-    return moment(date).format(withTime ? "DD MMMM YYYY hh:mm A" : "DD MMMM YYYY");
+    return moment(date).format(withTime ? "DD MMMM YYYY hh:mm A" : "DD/MM/YYYY");
 };

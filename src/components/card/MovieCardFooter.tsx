@@ -5,7 +5,7 @@ const MovieCardFooter = ({ msE }: MovieCardFooterProps) => (
         <div className="blockquote-footer text-capitalize mt-1 mb-1 text-end">
             {msE.msName}
             <br />
-            {msE.sSeasons === null ? "" : `• ${msE.sSeasons} Seasons`} {msE.sStatus === null ? "" : `• ${msE.sStatus}`}
+            {msE.sTSeasons == null ? "" : `• ${msE.sTSeasons} ${msE.sTSeasons === 1 ? "Season" : "Seasons"}`} {msE.sStatus === null ? "" : `• ${msE.sStatus}`}
         </div>
     </div>
 );
