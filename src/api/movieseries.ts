@@ -1,7 +1,7 @@
 import api from "./api";
 import retryRequest from "./retryRequest";
 import type { AxiosResponse } from "axios";
-import type { Filters, GetMovieSeriesResponse, MovieSeriesDetailsResponse, CollectionsResponse, AboutUsTypeResponse, ContactFormData, ContactUsTypeResponse } from "../types";
+import type { Filters, MovieSeriesResponse, MovieSeriesDetailsResponse, CollectionsResponse, AboutUsResponse, ContactFormData, ContactUsResponse } from "../types";
 
 const extractErrorMessage = (error: unknown): string => {
     if (error instanceof Error) return error.message;
@@ -12,7 +12,7 @@ const extractErrorMessage = (error: unknown): string => {
     return "Something went wrong";
 };
 
-export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20): Promise<AxiosResponse<GetMovieSeriesResponse>> => {
+export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20): Promise<AxiosResponse<MovieSeriesResponse>> => {
 
     const { f = "", i = "", w = "", s = "", g = "", c = "", o = "" } = filters;
     try {
@@ -28,7 +28,7 @@ export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20
         query.append("skip", skip.toString());
         query.append("limit", limit.toString());
 
-        return await retryRequest(() => api.get<GetMovieSeriesResponse>(`/movieseries/get?${query.toString()}`));
+        return await retryRequest(() => api.get<MovieSeriesResponse>(`/movieseries/get?${query.toString()}`));
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };
@@ -50,9 +50,9 @@ export const getCollectionMS = async (): Promise<AxiosResponse<CollectionsRespon
     };
 };
 
-export const getAboutUs = async (): Promise<AxiosResponse<AboutUsTypeResponse>> => {
+export const getAboutUs = async (): Promise<AxiosResponse<AboutUsResponse>> => {
     try {
-        return await api.get<AboutUsTypeResponse>("/about/get");
+        return await api.get<AboutUsResponse>("/about/get");
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };
@@ -66,9 +66,9 @@ export const postContact = async (addData: ContactFormData) => {
     };
 };
 
-export const getContact = async (): Promise<AxiosResponse<ContactUsTypeResponse>> => {
+export const getContact = async (): Promise<AxiosResponse<ContactUsResponse>> => {
     try {
-        return await api.get<ContactUsTypeResponse>("/query/get");
+        return await api.get<ContactUsResponse>("/query/get");
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };

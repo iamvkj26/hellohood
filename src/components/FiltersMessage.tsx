@@ -9,7 +9,7 @@ const FiltersMessage = ({ filters }: FiltersMessageProps) => {
     const { s, f, i, g, w } = filters;
 
     return (
-        <div className="container mt-1">
+        <div className="container mt-3">
             <div className="row">
                 <div className="col-md-12">
                     <div className="bg-141414 py-3 px-3 rounded">

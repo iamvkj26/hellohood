@@ -16,7 +16,7 @@ const NextWatch = ({ nextToWatch }: NextWatchs) => {
                 <div className="col-md-12">
                     <div className="bg-141414 py-3 px-3 rounded">
                         <div className="d-flex align-items-center gap-3 cp" onClick={() => navigate(`/details/${hashedId}`)}>
-                            <img className="next-watch-image text-danger" src={msPoster} alt={msName} />
+                            <img loading="lazy" className="next-watch-image text-danger" src={msPoster} alt={msName} />
                             <div>
                                 <h6 className="text-secondary">🎥 Watch Next...</h6>
                                 <h5><strong>{msName}</strong></h5>

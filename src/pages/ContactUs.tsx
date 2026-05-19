@@ -6,8 +6,7 @@ import useMovieSeries from "../hooks/useMovieSeries";
 import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
-import Information from "../components/Information";
-import type { ContactFormData, ApiResponse, ContactUsType } from "../types";
+import type { ContactFormData, ApiResponse, ContactUs } from "../types";
 
 const initialState: ContactFormData = { name: "", message: "" };
 
@@ -16,7 +15,7 @@ const ContactUs = () => {
     const { filters, updateFilter } = useFilters();
 
     const { contactUs, handleContactUs } = useMovieSeries() as {
-        contactUs: ContactUsType[];
+        contactUs: ContactUs[];
         handleContactUs: () => void;
     };
 
@@ -56,7 +55,6 @@ const ContactUs = () => {
     return (
         <>
             <SearchBar updateFilter={updateFilter} searchValue={filters.s} />
-            <Information />
 
             <div className="container mt-3 mb-3">
                 <div className="bg-dark p-3 rounded">

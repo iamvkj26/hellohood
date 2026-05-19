@@ -1,22 +1,22 @@
 import { useNavigate } from "react-router";
-import type { MovieCardProps } from "../../types";
-import MovieCardFooter from "./MovieCardFooter";
+import type { MovieSeriesCardProps } from "../../types";
+import MovieSeriesCardFooter from "./MovieSeriesCardFooter";
 
-const MovieCard = ({ msE }: MovieCardProps) => {
+const MovieSeriesCard = ({ msE }: MovieSeriesCardProps) => {
 
     const navigate = useNavigate();
 
     return (
-        <div className="movie-card-wrapper">
+        <div className="movie-series-card-wrapper">
             <div className="card position-relative cp bg-141414" onClick={() => navigate(`/details/${msE.hashedId}`)}>
                 <span className="position-absolute top-n10 end-0 badge rounded-pill bg-warning text-black">
                     <i className="fa-solid fa-star"></i> {msE.msRating}
                 </span>
-                <img src={msE.msPoster} className="card-img text-danger" alt={msE.msName} loading="lazy" />
-                <MovieCardFooter msE={msE} />
+                <img loading="lazy" src={msE.msPoster} className="card-img text-danger" alt={msE.msName} />
+                <MovieSeriesCardFooter msE={msE} />
             </div>
         </div>
     );
 };
 
-export default MovieCard;
+export default MovieSeriesCard;

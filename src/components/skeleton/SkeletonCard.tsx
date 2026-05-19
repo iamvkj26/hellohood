@@ -1,5 +1,5 @@
 const SkeletonCard = () => (
-    <div className="movie-card-wrapper" aria-hidden="true">
+    <div className="movie-series-card-wrapper" aria-hidden="true">
         <div className="card position-relative bg-dark border-0">
             <span className="position-absolute top-n10 end-0 badge rounded-pill skeleton skeleton-card-badge">
                 <i className="fa-solid fa-star"></i>

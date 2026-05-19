@@ -6,8 +6,8 @@ export interface UseMovieSeriesReturn {
     msDetails: MovieSeriesDetails | null;
     collections: Collection[];
     counts: Counts | null;
-    aboutUs: AboutUsType | null;
-    contactUs: ContactUsType[];
+    aboutUs: AboutUs | null;
+    contactUs: ContactUs[];
     hasMore: boolean;
     handleGetMS: (append?: boolean, skipOverride?: number) => Promise<void>;
     handleGetDetailsMS: (id: string) => Promise<void>;
@@ -25,7 +25,7 @@ export interface MovieSeriesItem {
     msRating?: number;
     msWatched?: boolean;
     hashedId: string;
-    sStatus: string;
+    msStatus: string;
     sTSeasons: number;
 };
 
@@ -38,14 +38,14 @@ export interface MovieSeriesGrouped {
     [label: string]: MovieSeriesItem[];
 };
 
-export interface GetMovieSeriesResponse {
+export interface MovieSeriesResponse {
     data: Section[];
     hasMore: boolean;
     counts: Counts;
     message: string;
 };
 
-export interface MovieCardListProps {
+export interface MovieSeriesCardListProps {
     mS: MovieSeriesGrouped;
     loadingInitial: boolean;
     loading: boolean;
@@ -53,11 +53,11 @@ export interface MovieCardListProps {
     hasMore: boolean;
 };
 
-export interface MovieCardProps {
+export interface MovieSeriesCardProps {
     msE: MovieSeriesItem;
 };
 
-export interface MovieCardFooterProps {
+export interface MovieSeriesCardFooterProps {
     msE: MovieSeriesItem;
 };
 
@@ -92,13 +92,35 @@ export interface MovieSeriesDetails {
     msRating?: number;
     msWatched?: boolean;
     msOTT?: string;
-    sStatus?: string;
+    msStatus?: string;
     sTSeasons?: number;
+    sSeasons?: Season[];
 };
 
 export interface MovieSeriesDetailsResponse {
     data: MovieSeriesDetails,
     message: string;
+};
+
+export interface MovieSeriesDetailsCardProps {
+    msDetails: MovieSeriesDetails;
+};
+
+export interface Season {
+    _id?: string;
+    sNumber: number;
+    sPoster?: string | null;
+    sReleaseDate?: string | null;
+    sEpisodeCount?: number | null;
+    sAbout?: string | null;
+    sAddedAt?: string | Date | null;
+    sWatched?: boolean;
+    sWatchedAt?: string | Date | null;
+    sStatus?: "released" | "upcoming";
+}
+
+export interface SeasonsCardProps {
+    seasons?: Season[];
 };
 
 export interface Collection {
@@ -131,7 +153,7 @@ interface Project {
     github: string;
 };
 
-export interface AboutUsType {
+export interface AboutUs {
     tagline: string;
     name: string;
     description: string;
@@ -142,8 +164,8 @@ export interface AboutUsType {
     contact: Record<string, string>;
 };
 
-export interface AboutUsTypeResponse {
-    data: AboutUsType,
+export interface AboutUsResponse {
+    data: AboutUs,
     message: string;
 };
 
@@ -159,7 +181,7 @@ export interface ApiResponse {
     };
 };
 
-export interface ContactUsType {
+export interface ContactUs {
     _id: string;
     name: string;
     message: string;
@@ -168,7 +190,7 @@ export interface ContactUsType {
     updatedAt: Date;
 };
 
-export interface ContactUsTypeResponse {
-    data: ContactUsType[],
+export interface ContactUsResponse {
+    data: ContactUs[],
     message: string;
 };

@@ -3,7 +3,6 @@ import useMovieSeries from "../hooks/useMovieSeries";
 import usePageTitle from "../hooks/usePageTitle";
 import SearchBar from "../components/SearchBar";
 import Filters from "../components/Filters";
-import Information from "../components/Information";
 import FiltersMessage from "../components/FiltersMessage";
 import Card from "../components/card/Card";
 import SkeletonFiltersMessage from "../components/skeleton/SkeletonFiltersMessage";
@@ -44,7 +43,6 @@ const MovieSeries = () => {
         <>
             <SearchBar updateFilter={updateFilter} searchValue={filters.s} />
             <Filters updateFilter={updateFilter} resetFilters={resetFilters} counts={counts} />
-            <Information />
             {loading ? (<SkeletonFiltersMessage />) : <FiltersMessage filters={filters} />}
             <Card filters={filters} />
         </>

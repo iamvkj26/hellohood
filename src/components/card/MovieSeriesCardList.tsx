@@ -1,9 +1,9 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import type { MovieCardListProps, MovieSeriesItem, Section } from "../../types";
+import type { MovieSeriesCardListProps, MovieSeriesItem, Section } from "../../types";
 import SkeletonCard from "../skeleton/SkeletonCard";
-import MovieCard from "./MovieCard";
+import MovieSeriesCard from "./MovieSeriesCard";
 
-const MovieCardList = ({ mS, loadingInitial, loading, loadMore, hasMore }: MovieCardListProps) => {
+const MovieSeriesCardList = ({ mS, loadingInitial, loading, loadMore, hasMore }: MovieSeriesCardListProps) => {
 
     const allMovies: Section[] = Object.entries(mS).sort(([a], [b]) => {
         if (a === "upcoming") return -1;
@@ -67,7 +67,7 @@ const MovieCardList = ({ mS, loadingInitial, loading, loadMore, hasMore }: Movie
                         <hr />
                         <div className="card-grid">
                             {movies.map((msE, idx) => (
-                                <MovieCard key={idx} msE={msE} />
+                                <MovieSeriesCard key={idx} msE={msE} />
                             ))}
                         </div>
                     </div>
@@ -83,4 +83,4 @@ const MovieCardList = ({ mS, loadingInitial, loading, loadMore, hasMore }: Movie
     );
 };
 
-export default MovieCardList;
+export default MovieSeriesCardList;
