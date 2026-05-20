@@ -6,8 +6,8 @@ export interface UseMovieSeriesReturn {
     msDetails: MovieSeriesDetails | null;
     collections: Collection[];
     counts: Counts | null;
-    aboutUs: AboutUs | null;
-    contactUs: ContactUs[];
+    aboutUs: AboutUsType | null;
+    contactUs: ContactUsType[];
     hasMore: boolean;
     handleGetMS: (append?: boolean, skipOverride?: number) => Promise<void>;
     handleGetDetailsMS: (id: string) => Promise<void>;
@@ -153,7 +153,7 @@ interface Project {
     github: string;
 };
 
-export interface AboutUs {
+export interface AboutUsType {
     tagline: string;
     name: string;
     description: string;
@@ -165,7 +165,7 @@ export interface AboutUs {
 };
 
 export interface AboutUsResponse {
-    data: AboutUs,
+    data: AboutUsType,
     message: string;
 };
 
@@ -181,7 +181,7 @@ export interface ApiResponse {
     };
 };
 
-export interface ContactUs {
+export interface ContactUsType {
     _id: string;
     name: string;
     message: string;
@@ -191,6 +191,6 @@ export interface ContactUs {
 };
 
 export interface ContactUsResponse {
-    data: ContactUs[],
+    data: ContactUsType[],
     message: string;
 };

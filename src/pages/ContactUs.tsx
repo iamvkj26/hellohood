@@ -6,7 +6,7 @@ import useMovieSeries from "../hooks/useMovieSeries";
 import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
-import type { ContactFormData, ApiResponse, ContactUs } from "../types";
+import type { ContactFormData, ApiResponse, ContactUsType } from "../types";
 
 const initialState: ContactFormData = { name: "", message: "" };
 
@@ -15,7 +15,7 @@ const ContactUs = () => {
     const { filters, updateFilter } = useFilters();
 
     const { contactUs, handleContactUs } = useMovieSeries() as {
-        contactUs: ContactUs[];
+        contactUs: ContactUsType[];
         handleContactUs: () => void;
     };
 

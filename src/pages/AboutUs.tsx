@@ -4,12 +4,12 @@ import useMovieSeries from "../hooks/useMovieSeries";
 import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
-import type { AboutUs } from "../types";
+import type { AboutUsType } from "../types";
 
 const AboutUs = () => {
 
     const { aboutUs, handleAboutUs } = useMovieSeries() as {
-        aboutUs: Partial<AboutUs>;
+        aboutUs: Partial<AboutUsType>;
         handleAboutUs: () => void;
     };
 
