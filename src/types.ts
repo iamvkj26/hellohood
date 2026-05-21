@@ -61,10 +61,6 @@ export interface MovieSeriesCardFooterProps {
     msE: MovieSeriesItem;
 };
 
-export interface CastBadgeProps {
-    casts?: string[];
-};
-
 export interface GenreBadgeProps {
     genres?: string[];
 };
@@ -84,7 +80,6 @@ export interface MovieSeriesDetails {
     msAbout?: string;
     msPoster: string;
     msLink?: string;
-    msCast?: string[];
     msGenre?: string[];
     msFormat?: string;
     msIndustry?: string;

@@ -62,14 +62,6 @@ const MovieSeriesDetailsCard = ({ msDetails }: MovieSeriesDetailsCardProps) => {
                             <div className="row mt-4 gy-4">
                                 <div className="col-6 col-md-4">
                                     <h6 className="fw-bold mb-1">
-                                        Cast
-                                    </h6>
-                                    <p className="text-light-emphasis mb-0 text-break">
-                                        {(msDetails?.msCast?.length ?? 0) > 0 ? msDetails?.msCast?.join(", ") : "Not Available"}
-                                    </p>
-                                </div>
-                                <div className="col-6 col-md-4">
-                                    <h6 className="fw-bold mb-1">
                                         Streaming On
                                     </h6>
                                     <div className="d-flex justify-content-start">
