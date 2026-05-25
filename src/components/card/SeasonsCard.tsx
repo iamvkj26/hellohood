@@ -11,77 +11,75 @@ const SeasonsCard = ({ seasons }: SeasonsCardProps) => {
 
     return (
         <div className="container mt-3">
-            <div className=" mt-3">
-                <h4 className="fw-bold">Current Season</h4>
-                <div className="card shadow-sm">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="bg-141414 py-3 px-3 rounded">
-                                <div className="d-flex gap-3">
-                                    <div>
+            <h4 className="mt-3">Current Season</h4>
+            <div className="card shadow-sm">
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="bg-141414 py-3 px-3 rounded">
+                            <div className="d-flex gap-3">
+                                <div>
+                                    {
+                                        latestSeason?.sPoster ? (
+                                            <img
+                                                loading="lazy"
+                                                src={latestSeason?.sPoster}
+                                                alt={`Season ${latestSeason?.sNumber}`}
+                                                className="current-season-image"
+                                            />
+                                        ) : (
+                                            <div className="current-season-placeholder">
+                                                No Poster
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                                <div className="flex-grow-1">
+                                    <h4 className="fw-bold">
+                                        Season {latestSeason?.sNumber}
+                                    </h4>
+                                    <div className="d-flex gap-2 flex-wrap mb-2">
                                         {
-                                            latestSeason?.sPoster ? (
-                                                <img
-                                                    loading="lazy"
-                                                    src={latestSeason?.sPoster}
-                                                    alt={`Season ${latestSeason?.sNumber}`}
-                                                    className="current-season-image"
-                                                />
-                                            ) : (
-                                                <div className="current-season-placeholder">
-                                                    No Poster
-                                                </div>
+                                            latestSeason?.sReleaseDate && (
+                                                <span className="fw-semibold">
+                                                    {new Date(latestSeason?.sReleaseDate).getFullYear()}
+                                                </span>
+                                            )
+                                        }
+                                        {
+                                            latestSeason?.sEpisodeCount && (
+                                                <span className="fw-semibold">
+                                                    • {latestSeason?.sEpisodeCount} Episodes
+                                                </span>
                                             )
                                         }
                                     </div>
-                                    <div className="flex-grow-1">
-                                        <h4 className="fw-bold">
-                                            Season {latestSeason?.sNumber}
-                                        </h4>
-                                        <div className="d-flex gap-2 flex-wrap mb-2">
-                                            {
-                                                latestSeason?.sReleaseDate && (
-                                                    <span className="fw-semibold">
-                                                        {new Date(latestSeason?.sReleaseDate).getFullYear()}
-                                                    </span>
-                                                )
-                                            }
-                                            {
-                                                latestSeason?.sEpisodeCount && (
-                                                    <span className="fw-semibold">
-                                                        • {latestSeason?.sEpisodeCount} Episodes
-                                                    </span>
-                                                )
-                                            }
-                                        </div>
+                                    {
+                                        latestSeason?.sAbout ? (
+                                            <p className="text-muted small mb-2">
+                                                {latestSeason?.sAbout.slice(0, 220)}...
+                                            </p>
+                                        ) : (
+                                            <p className="text-muted small">
+                                                No Description
+                                            </p>
+                                        )
+                                    }
+                                    <div className="d-flex gap-3 flex-wrap small">
                                         {
-                                            latestSeason?.sAbout ? (
-                                                <p className="text-muted small mb-2">
-                                                    {latestSeason?.sAbout.slice(0, 220)}...
-                                                </p>
-                                            ) : (
-                                                <p className="text-muted small">
-                                                    No Description
-                                                </p>
+                                            latestSeason?.sReleaseDate && (
+                                                <span>
+                                                    <i className="fa-regular fa-calendar"></i> {moment(latestSeason.sReleaseDate).format("DD/MM/YYYY | hh:mm A")} <span className="badge bg-dark">Season Finale</span>
+                                                </span>
                                             )
                                         }
-                                        <div className="d-flex gap-3 flex-wrap small">
-                                            {
-                                                latestSeason?.sReleaseDate && (
-                                                    <span>
-                                                        <i className="fa-regular fa-calendar"></i> {moment(latestSeason.sReleaseDate).format("DD/MM/YYYY | hh:mm A")} <span className="badge bg-dark">Season Finale</span>
-                                                    </span>
-                                                )
-                                            }
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h6 className="fw-bold mt-2 mb-3 cp" onClick={() => setShowAllSeasons(!showAllSeasons)}><u>{showAllSeasons ? "Hide All Seasons" : "View All Seasons"}</u></h6>
             </div>
+            <h6 className="fw-bold mt-2 mb-3 cp" onClick={() => setShowAllSeasons(!showAllSeasons)}><u>{showAllSeasons ? "Hide All Seasons" : "View All Seasons"}</u></h6>
             {
                 showAllSeasons && seasons?.map((season, index) => (
                     <div className="mt-3">
@@ -104,7 +102,7 @@ const SeasonsCard = ({ seasons }: SeasonsCardProps) => {
                                     }
                                 </div>
                                 <div className="col-md-10">
-                                    <h4 className="fw-bold mt-2 mb-2">Season {season.sNumber}</h4>
+                                    <h4 className="mt-2 mb-2">Season {season.sNumber}</h4>
                                     <div className="d-flex gap-2 align-items-center mb-3 flex-wrap">
                                         {
                                             season.sReleaseDate && (

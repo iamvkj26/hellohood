@@ -81,6 +81,7 @@ export interface MovieSeriesDetails {
     msPoster: string;
     msLink?: string;
     msGenre?: string[];
+    msCast?: Cast[];
     msFormat?: string;
     msIndustry?: string;
     msReleaseDate?: string;
@@ -101,6 +102,18 @@ export interface MovieSeriesDetailsCardProps {
     msDetails: MovieSeriesDetails;
 };
 
+export interface Cast {
+    id: number;
+    name: string;
+    character: string;
+    profile: string;
+}
+
+export interface CastProps {
+    casts?: Cast[];
+    format?: string;
+}
+
 export interface Season {
     _id?: string;
     sNumber: number;
@@ -117,6 +130,8 @@ export interface Season {
 export interface SeasonsCardProps {
     seasons?: Season[];
 };
+
+
 
 export interface Collection {
     name: string;

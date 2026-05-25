@@ -130,7 +130,7 @@ const MovieSeriesDetailsCard = ({ msDetails }: MovieSeriesDetailsCardProps) => {
                 </div>
             </div>
         </>
-    )
+    );
 };
 
 export default MovieSeriesDetailsCard;

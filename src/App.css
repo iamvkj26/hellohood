@@ -380,3 +380,47 @@ p {
     font-size: 14px;
     color: #6c757d;
 }
+
+.castSlider {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+}
+
+.castSlider::-webkit-scrollbar {
+    display: none;
+}
+
+.castCard {
+    min-width: 140px;
+    max-width: 140px;
+    background: #1c1c1c;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.castCard img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.castBody {
+    padding: 10px;
+}
+
+.castBody h6 {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: white;
+    font-weight: 600;
+}
+
+.castBody p {
+    font-size: 12px;
+    color: #b3b3b3;
+    margin: 0;
+}

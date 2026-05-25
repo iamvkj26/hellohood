@@ -6,6 +6,7 @@ import usePageTitle from "../hooks/usePageTitle";
 import useFilters from "../hooks/useFilters";
 import SearchBar from "../components/SearchBar";
 import MovieSeriesDetailsCard from "../components/card/MovieSeriesDetailsCard";
+import CastCarousel from "../components/card/CastCarousel";
 import SeasonsCard from "../components/card/SeasonsCard";
 
 const MovieSeriesDetails = () => {
@@ -30,6 +31,7 @@ const MovieSeriesDetails = () => {
         <>
             <SearchBar updateFilter={updateFilter} searchValue={filters.s} />
             <MovieSeriesDetailsCard msDetails={msDetails} />
+            <CastCarousel casts={msDetails?.msCast} format={msDetails?.msFormat} />
             {msDetails?.msFormat === "series" && (<SeasonsCard seasons={msDetails?.sSeasons} />)}
         </>
     );
