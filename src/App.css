@@ -400,12 +400,24 @@ p {
     border-radius: 10px;
     overflow: hidden;
     flex-shrink: 0;
+    text-decoration: none;
+    color: inherit;
 }
 
 .castCard img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+}
+
+.cast-profile-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
 }
 
 .castBody {
