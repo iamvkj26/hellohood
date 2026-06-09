@@ -13,6 +13,8 @@ const AboutUs = () => {
         handleAboutUs: () => void;
     };
 
+    console.log(aboutUs);
+
     const { filters, updateFilter } = useFilters();
 
     usePageTitle("About | HelloHood");
@@ -102,9 +104,9 @@ const AboutUs = () => {
                                         <div className="accordion-body">
                                             {Object.entries(aboutUs?.roles || {}).map(
                                                 ([role, desc]) => (
-                                                    <li key={role}>
+                                                    <div key={role}>
                                                         <strong>{role}:</strong> {desc}
-                                                    </li>
+                                                    </div>
                                                 )
                                             )}
                                         </div>
@@ -121,9 +123,9 @@ const AboutUs = () => {
                                             <div className="accordion-body">
                                                 {Object.entries(aboutUs?.dataHandling).map(
                                                     ([key, value]) => (
-                                                        <li key={key}>
+                                                        <div key={key}>
                                                             <strong>{key}:</strong> {value}
-                                                        </li>
+                                                        </div>
                                                     )
                                                 )}
                                             </div>
