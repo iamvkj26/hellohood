@@ -7,11 +7,10 @@ export type Filters = {
     w: string;
     s: string;
     g: string;
-    c: string;
     o: string;
 };
 
-const defaultFilters: Filters = { f: "", i: "", w: "", s: "", g: "", c: "", o: "" };
+const defaultFilters: Filters = { f: "", i: "", w: "", s: "", g: "", o: "" };
 
 const useFilters = () => {
 

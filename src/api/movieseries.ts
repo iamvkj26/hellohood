@@ -1,7 +1,7 @@
 import api from "./api";
 import retryRequest from "./retryRequest";
 import type { AxiosResponse } from "axios";
-import type { Filters, MovieSeriesResponse, MovieSeriesDetailsResponse, CollectionsResponse, AboutUsResponse, ContactFormData, ContactUsResponse } from "../types";
+import type { Filters, MovieSeriesResponse, MovieSeriesDetailsResponse, AboutUsResponse, ContactFormData, ContactUsResponse } from "../types";
 
 const extractErrorMessage = (error: unknown): string => {
     if (error instanceof Error) return error.message;
@@ -14,7 +14,7 @@ const extractErrorMessage = (error: unknown): string => {
 
 export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20): Promise<AxiosResponse<MovieSeriesResponse>> => {
 
-    const { f = "", i = "", w = "", s = "", g = "", c = "", o = "" } = filters;
+    const { f = "", i = "", w = "", s = "", g = "", o = "" } = filters;
     try {
         const query = new URLSearchParams();
         if (f) query.append("format", f);
@@ -22,7 +22,6 @@ export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20
         if (w) query.append("watched", w);
         if (s) query.append("search", s);
         if (g) query.append("genre", g);
-        if (c) query.append("collection", c);
         if (o) query.append("ott", o);
 
         query.append("skip", skip.toString());
@@ -37,14 +36,6 @@ export const getMS = async (filters: Partial<Filters> = {}, skip = 0, limit = 20
 export const getDetailsMS = async (id: string): Promise<AxiosResponse<MovieSeriesDetailsResponse>> => {
     try {
         return await retryRequest(() => api.get<MovieSeriesDetailsResponse>(`/movieseries/get/details/${id}`));
-    } catch (error: unknown) {
-        throw new Error(extractErrorMessage(error));
-    };
-};
-
-export const getCollectionMS = async (): Promise<AxiosResponse<CollectionsResponse>> => {
-    try {
-        return await api.get<CollectionsResponse>("/movieseries/collections");
     } catch (error: unknown) {
         throw new Error(extractErrorMessage(error));
     };

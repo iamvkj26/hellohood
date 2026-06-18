@@ -4,14 +4,12 @@ export interface UseMovieSeriesReturn {
     loadingInitial: boolean;
     loading: boolean;
     msDetails: MovieSeriesDetails | null;
-    collections: Collection[];
     counts: Counts | null;
     aboutUs: AboutUsType | null;
     contactUs: ContactUsType[];
     hasMore: boolean;
     handleGetMS: (append?: boolean, skipOverride?: number) => Promise<void>;
     handleGetDetailsMS: (id: string) => Promise<void>;
-    handleCollectionsMS: () => Promise<void>;
     handleAboutUs: () => Promise<void>;
     handleContactUs: () => Promise<void>;
 };
@@ -71,7 +69,6 @@ export interface Counts {
     industry: Record<string, number>;
     watched: Record<string, number>;
     genre: Record<string, number>;
-    collection: Record<string, number>;
     ott: Record<string, number>;
 };
 
@@ -131,24 +128,12 @@ export interface SeasonsCardProps {
     seasons?: Season[];
 };
 
-
-
-export interface Collection {
-    name: string;
-    icon: string;
-};
-
-export interface CollectionsResponse {
-    data: Collection[];
-};
-
 export interface Filters {
     f?: string;
     i?: string;
     w?: string;
     s?: string;
     g?: string;
-    c?: string;
     o?: string;
 };
 

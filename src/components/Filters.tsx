@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import type { Filters as FiltersType } from "../hooks/useFilters";
 import type { Counts } from "../types";
-import useMovieSeries from "../hooks/useMovieSeries";
 
 export interface FiltersProps {
     updateFilter: <K extends keyof FiltersType>(key: K, value: FiltersType[K]) => void;
@@ -10,13 +8,6 @@ export interface FiltersProps {
 };
 
 const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
-
-    const { collections, handleCollectionsMS } = useMovieSeries();
-
-    useEffect(() => {
-        handleCollectionsMS();
-        // eslint-disable-next-line
-    }, []);
 
     const handleFilterClick = <K extends keyof FiltersType>(key: K, value: FiltersType[K]) => {
         updateFilter(key, value);
@@ -105,24 +96,6 @@ const Filters = ({ updateFilter, resetFilters, counts }: FiltersProps) => {
                                         </button>
                                     </li>
                                 ))}
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <button className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                                <i className="fa-solid fa-folder-open text-warning me-1"></i> Collections
-                            </button>
-                            <ul className="dropdown-menu bg-141414">
-                                {collections.map((c, index) => {
-                                    const count = counts?.collection?.[c.name.toLowerCase()] || 0
-                                    return (
-                                        <li key={index + 1}>
-                                            <button className="dropdown-item" title={count !== undefined ? `${c.name}: ${count}` : undefined} onClick={() => handleFilterClick("c", c.name as FiltersType["c"])}>
-                                                <i className="fa-solid fa-caret-right me-1"></i> {c.name}
-                                            </button>
-                                        </li>
-                                    )
-                                }
-                                )}
                             </ul>
                         </li>
                         <li className="nav-item dropdown">

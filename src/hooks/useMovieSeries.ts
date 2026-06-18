@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-hot-toast";
-import { getMS, getDetailsMS, getCollectionMS, getAboutUs, getContact } from "../api/movieseries";
-import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, Section, Counts, MovieSeriesDetails, Collection, AboutUsType, ContactUsType, Filters } from "../types";
+import { getMS, getDetailsMS, getAboutUs, getContact } from "../api/movieseries";
+import type { UseMovieSeriesReturn, MovieSeriesItem, MovieSeriesGrouped, Section, Counts, MovieSeriesDetails, AboutUsType, ContactUsType, Filters } from "../types";
 
 const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
 
@@ -9,7 +9,6 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
     const [nextToWatch, setNextToWatch] = useState<MovieSeriesItem | null>(null);
     const [counts, setCounts] = useState<Counts | null>(null);
     const [msDetails, setMSDetails] = useState<MovieSeriesDetails | null>(null);
-    const [collections, setCollections] = useState<Collection[]>([]);
     const [aboutUs, setAboutUs] = useState<AboutUsType | null>(null);
     const [contactUs, setContactUs] = useState<ContactUsType[]>([]);
     const [loadingInitial, setLoadingInitial] = useState(true);
@@ -82,20 +81,6 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
         };
     }, []);
 
-    const handleCollectionsMS = useCallback(async () => {
-        try {
-            const { data } = await getCollectionMS();
-            if (data && typeof data === "object") {
-                setCollections(data.data);
-            } else {
-                toast.error("Failed to fetch collections.");
-            };
-        } catch (error: unknown) {
-            const message = error instanceof Error ? error.message : "Failed to fetch movie/series details.";
-            toast.error(message);
-        };
-    }, []);
-
     const handleAboutUs = async () => {
         try {
             setLoading(true);
@@ -141,7 +126,7 @@ const useMovieSeries = (filters?: Filters): UseMovieSeriesReturn => {
     }, [filters]);
 
     return {
-        mS, nextToWatch, loadingInitial, loading, msDetails, collections, aboutUs, contactUs, hasMore, counts, handleGetMS, handleGetDetailsMS, handleCollectionsMS, handleAboutUs, handleContactUs
+        mS, nextToWatch, loadingInitial, loading, msDetails, aboutUs, contactUs, hasMore, counts, handleGetMS, handleGetDetailsMS, handleAboutUs, handleContactUs
     };
 };
 

@@ -20,7 +20,6 @@ const MovieSeries = () => {
     if (filters.i) activeFilters.push(capitalize(filters.i));
     if (filters.w) activeFilters.push(filters.w === "true" ? "Watched" : "To Watch");
     if (filters.g) activeFilters.push(capitalize(filters.g));
-    if (filters.c) activeFilters.push(capitalize(filters.c));
 
     const hasSearch = !!filters.s;
 
